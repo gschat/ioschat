@@ -85,10 +85,10 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  subspec "gsrpc" do |gsrpc|
-      gsrpc.source_files  = "gsrpc/*.{h,m}"
+  s "gsrpc" do |gsrpc|
+      gsrpc.source_files  = "gsrpc/com/**/*.{h,m}"
       gsrpc.public_header_files = "gsrpc/**/*.h"
-      gsrpc.dependency 'objrpc', '~> 1.0'
+      gsrpc.dependency 'objrpc', '~> 1.0.0'
   end
 
 
