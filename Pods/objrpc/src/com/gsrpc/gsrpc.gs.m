@@ -1,43 +1,37 @@
-#import <com/gsrpc/gsrpc.gs.h>
+#import "com/gsrpc/gsrpc.gs.h"
 
 #import <com/gsrpc/gsrpc.gs.h>
 
 
-@implementation GSCodeHelper
+@implementation GSStateHelper
 
-+ (void) marshal:(GSCode) val withWriter:(id<GSWriter>) writer {
++ (void) marshal:(GSState) val withWriter:(id<GSWriter>) writer {
     [writer WriteByte:(UInt8) val];
 }
 
-+ (GSCode) unmarshal:(id<GSReader>) reader {
-    return (GSCode)[reader ReadByte];
++ (GSState) unmarshal:(id<GSReader>) reader {
+    return (GSState)[reader ReadByte];
 }
 
-+ (NSString*) tostring:(GSCode)val {
++ (NSString*) tostring:(GSState)val {
     
     switch(val)
     {
     
-    case GSCodeHeartbeat:
-       return @"GSCodeHeartbeat";
+    case GSStateDisconnect:
+       return @"GSStateDisconnect";
     
-    case GSCodeWhoAmI:
-       return @"GSCodeWhoAmI";
+    case GSStateConnecting:
+       return @"GSStateConnecting";
     
-    case GSCodeRequest:
-       return @"GSCodeRequest";
+    case GSStateConnected:
+       return @"GSStateConnected";
     
-    case GSCodeResponse:
-       return @"GSCodeResponse";
+    case GSStateDisconnecting:
+       return @"GSStateDisconnecting";
     
-    case GSCodeAccept:
-       return @"GSCodeAccept";
-    
-    case GSCodeReject:
-       return @"GSCodeReject";
-    
-    case GSCodeTunnel:
-       return @"GSCodeTunnel";
+    case GSStateClosed:
+       return @"GSStateClosed";
     
     default:
        return @"Unknown val";
@@ -89,112 +83,6 @@
 }
 
 @end
-
-@implementation GSParam
-+ (instancetype)init {
-    return [[GSParam alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Content = [[NSMutableData alloc] init];
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteBytes: _Content];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Content = [reader ReadBytes];
-
-
-}
-
-@end
-
-@implementation GSOSTypeHelper
-
-+ (void) marshal:(GSOSType) val withWriter:(id<GSWriter>) writer {
-    [writer WriteByte:(UInt8) val];
-}
-
-+ (GSOSType) unmarshal:(id<GSReader>) reader {
-    return (GSOSType)[reader ReadByte];
-}
-
-+ (NSString*) tostring:(GSOSType)val {
-    
-    switch(val)
-    {
-    
-    case GSOSTypeWindows:
-       return @"GSOSTypeWindows";
-    
-    case GSOSTypeLinux:
-       return @"GSOSTypeLinux";
-    
-    case GSOSTypeOSX:
-       return @"GSOSTypeOSX";
-    
-    case GSOSTypeWP:
-       return @"GSOSTypeWP";
-    
-    case GSOSTypeAndroid:
-       return @"GSOSTypeAndroid";
-    
-    case GSOSTypeIOS:
-       return @"GSOSTypeIOS";
-    
-    default:
-       return @"Unknown val";
-   }
-}
-
-@end
-
-
-@implementation GSStateHelper
-
-+ (void) marshal:(GSState) val withWriter:(id<GSWriter>) writer {
-    [writer WriteByte:(UInt8) val];
-}
-
-+ (GSState) unmarshal:(id<GSReader>) reader {
-    return (GSState)[reader ReadByte];
-}
-
-+ (NSString*) tostring:(GSState)val {
-    
-    switch(val)
-    {
-    
-    case GSStateDisconnect:
-       return @"GSStateDisconnect";
-    
-    case GSStateConnecting:
-       return @"GSStateConnecting";
-    
-    case GSStateConnected:
-       return @"GSStateConnected";
-    
-    case GSStateDisconnecting:
-       return @"GSStateDisconnecting";
-    
-    case GSStateClosed:
-       return @"GSStateClosed";
-    
-    default:
-       return @"Unknown val";
-   }
-}
-
-@end
-
 
 @implementation GSRequest
 + (instancetype)init {
@@ -437,6 +325,147 @@
 
 @end
 
+@implementation GSInvalidContract
++ (instancetype)init {
+    return [[GSInvalidContract alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+}
+
+- (NSError*) asNSError {
+    NSString *domain = @"GSInvalidContract";
+
+    NSDictionary *userInfo = @{ @"source" : self };
+
+    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
+
+    return error;
+}
+
+@end
+
+@implementation GSCodeHelper
+
++ (void) marshal:(GSCode) val withWriter:(id<GSWriter>) writer {
+    [writer WriteByte:(UInt8) val];
+}
+
++ (GSCode) unmarshal:(id<GSReader>) reader {
+    return (GSCode)[reader ReadByte];
+}
+
++ (NSString*) tostring:(GSCode)val {
+    
+    switch(val)
+    {
+    
+    case GSCodeHeartbeat:
+       return @"GSCodeHeartbeat";
+    
+    case GSCodeWhoAmI:
+       return @"GSCodeWhoAmI";
+    
+    case GSCodeRequest:
+       return @"GSCodeRequest";
+    
+    case GSCodeResponse:
+       return @"GSCodeResponse";
+    
+    case GSCodeAccept:
+       return @"GSCodeAccept";
+    
+    case GSCodeReject:
+       return @"GSCodeReject";
+    
+    case GSCodeTunnel:
+       return @"GSCodeTunnel";
+    
+    default:
+       return @"Unknown val";
+   }
+}
+
+@end
+
+
+@implementation GSParam
++ (instancetype)init {
+    return [[GSParam alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Content = [[NSMutableData alloc] init];
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteBytes: _Content];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Content = [reader ReadBytes];
+
+
+}
+
+@end
+
+@implementation GSOSTypeHelper
+
++ (void) marshal:(GSOSType) val withWriter:(id<GSWriter>) writer {
+    [writer WriteByte:(UInt8) val];
+}
+
++ (GSOSType) unmarshal:(id<GSReader>) reader {
+    return (GSOSType)[reader ReadByte];
+}
+
++ (NSString*) tostring:(GSOSType)val {
+    
+    switch(val)
+    {
+    
+    case GSOSTypeWindows:
+       return @"GSOSTypeWindows";
+    
+    case GSOSTypeLinux:
+       return @"GSOSTypeLinux";
+    
+    case GSOSTypeOSX:
+       return @"GSOSTypeOSX";
+    
+    case GSOSTypeWP:
+       return @"GSOSTypeWP";
+    
+    case GSOSTypeAndroid:
+       return @"GSOSTypeAndroid";
+    
+    case GSOSTypeIOS:
+       return @"GSOSTypeIOS";
+    
+    default:
+       return @"Unknown val";
+   }
+}
+
+@end
+
+
 @implementation GSWhoAmI
 + (instancetype)init {
     return [[GSWhoAmI alloc] init];
@@ -468,35 +497,6 @@
 	_Context = [reader ReadBytes];
 
 
-}
-
-@end
-
-@implementation GSInvalidContract
-+ (instancetype)init {
-    return [[GSInvalidContract alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-}
-
-- (NSError*) asNSError {
-    NSString *domain = @"GSInvalidContract";
-
-    NSDictionary *userInfo = @{ @"source" : self };
-
-    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
-
-    return error;
 }
 
 @end
