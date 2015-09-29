@@ -41,6 +41,49 @@
 @end
 
 
+@implementation GSMessage
++ (instancetype)init {
+    return [[GSMessage alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Code = GSCodeHeartbeat;
+        
+        _Agent = (UInt8)0;
+        
+        _Content = [[NSMutableData alloc] init];
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[GSCodeHelper marshal: _Code withWriter: writer];
+
+
+	[writer WriteByte :_Agent];
+
+
+	[writer WriteBytes: _Content];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Code = [GSCodeHelper unmarshal: reader];
+
+
+	_Agent = [reader ReadByte];
+
+
+	_Content = [reader ReadBytes];
+
+
+}
+
+@end
+
 @implementation GSRequest
 + (instancetype)init {
     return [[GSRequest alloc] init];
@@ -105,35 +148,51 @@
 
 @end
 
-@implementation GSTunnel
+@implementation GSResponse
 + (instancetype)init {
-    return [[GSTunnel alloc] init];
+    return [[GSResponse alloc] init];
 }
 - (instancetype)init{
     if (self = [super init]){
         
-        _ID = [[GSDevice alloc] init];
+        _ID = (UInt16)0;
         
-        _Message = [[GSMessage alloc] init];
+        _Service = (UInt16)0;
+        
+        _Exception = (SInt8)0;
+        
+        _Content = [[NSMutableData alloc] init];
         
     }
     return self;
 }
 - (void) marshal:(id<GSWriter>) writer {
 
-	[_ID marshal: writer];
+	[writer WriteUInt16 :_ID];
 
 
-	[_Message marshal: writer];
+	[writer WriteUInt16 :_Service];
+
+
+	[writer WriteSByte :_Exception];
+
+
+	[writer WriteBytes: _Content];
 
 
 }
 - (void) unmarshal:(id<GSReader>) reader {
 
-	[_ID unmarshal:reader ];
+	_ID = [reader ReadUInt16];
 
 
-	[_Message unmarshal:reader ];
+	_Service = [reader ReadUInt16];
+
+
+	_Exception = [reader ReadSByte];
+
+
+	_Content = [reader ReadBytes];
 
 
 }
@@ -180,6 +239,176 @@
 
 @end
 
+
+@implementation GSWhoAmI
++ (instancetype)init {
+    return [[GSWhoAmI alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _ID = [[GSDevice alloc] init];
+        
+        _Context = [[NSMutableData alloc] init];
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[_ID marshal: writer];
+
+
+	[writer WriteBytes: _Context];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	[_ID unmarshal:reader ];
+
+
+	_Context = [reader ReadBytes];
+
+
+}
+
+@end
+
+@implementation GSRemoteException
++ (instancetype)init {
+    return [[GSRemoteException alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+}
+
+- (NSError*) asNSError {
+    NSString *domain = @"GSRemoteException";
+
+    NSDictionary *userInfo = @{ @"source" : self };
+
+    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
+
+    return error;
+}
+
+@end
+
+@implementation GSCodeHelper
+
++ (void) marshal:(GSCode) val withWriter:(id<GSWriter>) writer {
+    [writer WriteByte:(UInt8) val];
+}
+
++ (GSCode) unmarshal:(id<GSReader>) reader {
+    return (GSCode)[reader ReadByte];
+}
+
++ (NSString*) tostring:(GSCode)val {
+    
+    switch(val)
+    {
+    
+    case GSCodeHeartbeat:
+       return @"GSCodeHeartbeat";
+    
+    case GSCodeWhoAmI:
+       return @"GSCodeWhoAmI";
+    
+    case GSCodeRequest:
+       return @"GSCodeRequest";
+    
+    case GSCodeResponse:
+       return @"GSCodeResponse";
+    
+    case GSCodeAccept:
+       return @"GSCodeAccept";
+    
+    case GSCodeReject:
+       return @"GSCodeReject";
+    
+    case GSCodeTunnel:
+       return @"GSCodeTunnel";
+    
+    default:
+       return @"Unknown val";
+   }
+}
+
+@end
+
+
+@implementation GSParam
++ (instancetype)init {
+    return [[GSParam alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Content = [[NSMutableData alloc] init];
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteBytes: _Content];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Content = [reader ReadBytes];
+
+
+}
+
+@end
+
+@implementation GSTunnel
++ (instancetype)init {
+    return [[GSTunnel alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _ID = [[GSDevice alloc] init];
+        
+        _Message = [[GSMessage alloc] init];
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[_ID marshal: writer];
+
+
+	[_Message marshal: writer];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	[_ID unmarshal:reader ];
+
+
+	[_Message unmarshal:reader ];
+
+
+}
+
+@end
 
 @implementation GSArchTypeHelper
 
@@ -266,235 +495,6 @@
 
 
 	_OSVersion = [reader ReadString];
-
-
-}
-
-@end
-
-@implementation GSRemoteException
-+ (instancetype)init {
-    return [[GSRemoteException alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-}
-
-- (NSError*) asNSError {
-    NSString *domain = @"GSRemoteException";
-
-    NSDictionary *userInfo = @{ @"source" : self };
-
-    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
-
-    return error;
-}
-
-@end
-
-@implementation GSCodeHelper
-
-+ (void) marshal:(GSCode) val withWriter:(id<GSWriter>) writer {
-    [writer WriteByte:(UInt8) val];
-}
-
-+ (GSCode) unmarshal:(id<GSReader>) reader {
-    return (GSCode)[reader ReadByte];
-}
-
-+ (NSString*) tostring:(GSCode)val {
-    
-    switch(val)
-    {
-    
-    case GSCodeHeartbeat:
-       return @"GSCodeHeartbeat";
-    
-    case GSCodeWhoAmI:
-       return @"GSCodeWhoAmI";
-    
-    case GSCodeRequest:
-       return @"GSCodeRequest";
-    
-    case GSCodeResponse:
-       return @"GSCodeResponse";
-    
-    case GSCodeAccept:
-       return @"GSCodeAccept";
-    
-    case GSCodeReject:
-       return @"GSCodeReject";
-    
-    case GSCodeTunnel:
-       return @"GSCodeTunnel";
-    
-    default:
-       return @"Unknown val";
-   }
-}
-
-@end
-
-
-@implementation GSMessage
-+ (instancetype)init {
-    return [[GSMessage alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Code = GSCodeHeartbeat;
-        
-        _Agent = (UInt8)0;
-        
-        _Content = [[NSMutableData alloc] init];
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[GSCodeHelper marshal: _Code withWriter: writer];
-
-
-	[writer WriteByte :_Agent];
-
-
-	[writer WriteBytes: _Content];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Code = [GSCodeHelper unmarshal: reader];
-
-
-	_Agent = [reader ReadByte];
-
-
-	_Content = [reader ReadBytes];
-
-
-}
-
-@end
-
-@implementation GSParam
-+ (instancetype)init {
-    return [[GSParam alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Content = [[NSMutableData alloc] init];
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteBytes: _Content];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Content = [reader ReadBytes];
-
-
-}
-
-@end
-
-@implementation GSResponse
-+ (instancetype)init {
-    return [[GSResponse alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _ID = (UInt16)0;
-        
-        _Service = (UInt16)0;
-        
-        _Exception = (SInt8)0;
-        
-        _Content = [[NSMutableData alloc] init];
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteUInt16 :_ID];
-
-
-	[writer WriteUInt16 :_Service];
-
-
-	[writer WriteSByte :_Exception];
-
-
-	[writer WriteBytes: _Content];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_ID = [reader ReadUInt16];
-
-
-	_Service = [reader ReadUInt16];
-
-
-	_Exception = [reader ReadSByte];
-
-
-	_Content = [reader ReadBytes];
-
-
-}
-
-@end
-
-@implementation GSWhoAmI
-+ (instancetype)init {
-    return [[GSWhoAmI alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _ID = [[GSDevice alloc] init];
-        
-        _Context = [[NSMutableData alloc] init];
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[_ID marshal: writer];
-
-
-	[writer WriteBytes: _Context];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	[_ID unmarshal:reader ];
-
-
-	_Context = [reader ReadBytes];
 
 
 }
