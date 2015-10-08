@@ -3,6 +3,639 @@
 #import <com/gsrpc/gsrpc.gs.h>
 
 
+@implementation GSChatAttachmentVideo
++ (instancetype)init {
+    return [[GSChatAttachmentVideo alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Key = @"";
+        
+        _Name = @"";
+        
+        _Duration = (SInt16)0;
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteString :_Key];
+
+
+	[writer WriteString :_Name];
+
+
+	[writer WriteInt16 :_Duration];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Key = [reader ReadString];
+
+
+	_Name = [reader ReadString];
+
+
+	_Duration = [reader ReadInt16];
+
+
+}
+
+@end
+
+@implementation GSChatAttachmentAudio
++ (instancetype)init {
+    return [[GSChatAttachmentAudio alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Key = @"";
+        
+        _Name = @"";
+        
+        _Duration = (SInt16)0;
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteString :_Key];
+
+
+	[writer WriteString :_Name];
+
+
+	[writer WriteInt16 :_Duration];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Key = [reader ReadString];
+
+
+	_Name = [reader ReadString];
+
+
+	_Duration = [reader ReadInt16];
+
+
+}
+
+@end
+
+
+
+@implementation GSChatIMServerService{
+    id<GSChatIMServer> _service;
+}
++ (instancetype) init:(id<GSChatIMServer>)service withID:(UInt16) serviceID {
+    return [[GSChatIMServerService alloc] init: service withID: serviceID];
+}
+- (instancetype) init:(id<GSChatIMServer>)service withID:(UInt16) serviceID {
+    if(self = [super init]) {
+        _service = service;
+        _ID = serviceID;
+    }
+    return self;
+}
+
+- (GSResponse*) Dispatch:(GSRequest*)call {
+    switch(call.Method){
+    
+    case 0:
+    {
+		GSChatMail* arg0 = [[GSChatMail alloc] init];
+
+		{
+
+			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
+
+			[arg0 unmarshal:reader ];
+		}
+
+
+        UInt64 ret = [ _service Put: arg0 ];
+        
+        GSResponse * callreturn  = [GSResponse init];
+        		{
+
+			GSBytesWriter *writer = [[GSBytesWriter alloc] init];
+
+			[writer WriteUInt64 :ret];
+			callreturn.Content = writer.content;
+
+		}
+
+
+        callreturn.ID = call.ID;
+        callreturn.Service = call.Service;
+        return callreturn;
+        
+        break;
+    }
+    
+    case 1:
+    {
+		UInt32 arg0 = (UInt32)0;
+
+		{
+
+			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
+
+			arg0 = [reader ReadUInt32];
+		}
+
+
+        [ _service Pull: arg0 ];
+        
+        break;
+    }
+    
+    }
+    return nil;
+}
+
+@end
+
+
+@implementation GSChatIMServerRPC {
+    id<GSChannel> _channel;
+    UInt16 _serviceID;
+}
++ (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
+    return [[GSChatIMServerRPC alloc] initRPC: channel withID: serviceID];
+}
+- (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
+    if(self = [super init]) {
+        _channel = channel;
+        _serviceID = serviceID;
+    }
+    return self;
+}
+
+
+- (id<GSPromise>) Put:(GSChatMail*) arg0 {
+    GSRequest* call = [GSRequest init];
+    call.Service = _serviceID;
+    call.Method = (UInt16)0;
+    
+    NSMutableArray * params = [NSMutableArray array];
+	{
+
+		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
+
+		[arg0 marshal: writer];
+		GSParam *param  = [GSParam init];
+
+		param.Content = writer.content;
+
+		[params addObject:param];
+
+	}
+
+
+    call.Params = params;
+    
+
+    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
+
+		UInt64 callreturn = (UInt64)0;
+
+		{
+
+			GSBytesReader *reader = [GSBytesReader initWithNSData: response.Content];
+
+			callreturn = [reader ReadUInt64];
+		}
+
+
+        return ((id<GSPromise>(^)(UInt64))block)(callreturn);;
+    });
+}
+
+- (id<GSPromise>) Pull:(UInt32) arg0 {
+    GSRequest* call = [GSRequest init];
+    call.Service = _serviceID;
+    call.Method = (UInt16)1;
+    
+    NSMutableArray * params = [NSMutableArray array];
+	{
+
+		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
+
+		[writer WriteUInt32 :arg0];
+		GSParam *param  = [GSParam init];
+
+		param.Content = writer.content;
+
+		[params addObject:param];
+
+	}
+
+
+    call.Params = params;
+    
+
+    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
+
+
+        return ((id<GSPromise>(^)())block)();;
+    });
+}
+
+@end
+
+
+
+
+
+
+@implementation GSChatIMPushService{
+    id<GSChatIMPush> _service;
+}
++ (instancetype) init:(id<GSChatIMPush>)service withID:(UInt16) serviceID {
+    return [[GSChatIMPushService alloc] init: service withID: serviceID];
+}
+- (instancetype) init:(id<GSChatIMPush>)service withID:(UInt16) serviceID {
+    if(self = [super init]) {
+        _service = service;
+        _ID = serviceID;
+    }
+    return self;
+}
+
+- (GSResponse*) Dispatch:(GSRequest*)call {
+    switch(call.Method){
+    
+    case 0:
+    {
+		NSMutableData * arg0 = [[NSMutableData alloc] init];
+
+		{
+
+			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
+
+			arg0 = [reader ReadBytes];
+		}
+
+
+        [ _service Register: arg0 ];
+        
+        break;
+    }
+    
+    case 1:
+    {
+
+         [ _service Unregister];
+        
+        break;
+    }
+    
+    }
+    return nil;
+}
+
+@end
+
+
+@implementation GSChatIMPushRPC {
+    id<GSChannel> _channel;
+    UInt16 _serviceID;
+}
++ (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
+    return [[GSChatIMPushRPC alloc] initRPC: channel withID: serviceID];
+}
+- (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
+    if(self = [super init]) {
+        _channel = channel;
+        _serviceID = serviceID;
+    }
+    return self;
+}
+
+
+- (id<GSPromise>) Register:(NSMutableData *) arg0 {
+    GSRequest* call = [GSRequest init];
+    call.Service = _serviceID;
+    call.Method = (UInt16)0;
+    
+    NSMutableArray * params = [NSMutableArray array];
+	{
+
+		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
+
+		[writer WriteBytes: arg0];
+		GSParam *param  = [GSParam init];
+
+		param.Content = writer.content;
+
+		[params addObject:param];
+
+	}
+
+
+    call.Params = params;
+    
+
+    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
+
+
+        return ((id<GSPromise>(^)())block)();;
+    });
+}
+
+- (id<GSPromise>) Unregister{
+    GSRequest* call = [GSRequest init];
+    call.Service = _serviceID;
+    call.Method = (UInt16)1;
+    
+
+    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
+
+
+        return ((id<GSPromise>(^)())block)();;
+    });
+}
+
+@end
+
+
+
+
+@implementation GSChatAttachmentImage
++ (instancetype)init {
+    return [[GSChatAttachmentImage alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Key = @"";
+        
+        _Name = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteString :_Key];
+
+
+	[writer WriteString :_Name];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Key = [reader ReadString];
+
+
+	_Name = [reader ReadString];
+
+
+}
+
+@end
+
+@implementation GSChatAttachmentCMD
++ (instancetype)init {
+    return [[GSChatAttachmentCMD alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Command = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteString :_Command];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Command = [reader ReadString];
+
+
+}
+
+@end
+
+@implementation GSChatUserAuthFailed
++ (instancetype)init {
+    return [[GSChatUserAuthFailed alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+}
+
+- (NSError*) asNSError {
+    NSString *domain = @"GSChatUserAuthFailed";
+
+    NSDictionary *userInfo = @{ @"source" : self };
+
+    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
+
+    return error;
+}
+
+@end
+
+@implementation GSChatProperty
++ (instancetype)init {
+    return [[GSChatProperty alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Key = @"";
+        
+        _Value = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteString :_Key];
+
+
+	[writer WriteString :_Value];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Key = [reader ReadString];
+
+
+	_Value = [reader ReadString];
+
+
+}
+
+@end
+
+
+
+@implementation GSChatIMClientService{
+    id<GSChatIMClient> _service;
+}
++ (instancetype) init:(id<GSChatIMClient>)service withID:(UInt16) serviceID {
+    return [[GSChatIMClientService alloc] init: service withID: serviceID];
+}
+- (instancetype) init:(id<GSChatIMClient>)service withID:(UInt16) serviceID {
+    if(self = [super init]) {
+        _service = service;
+        _ID = serviceID;
+    }
+    return self;
+}
+
+- (GSResponse*) Dispatch:(GSRequest*)call {
+    switch(call.Method){
+    
+    case 0:
+    {
+		GSChatMail* arg0 = [[GSChatMail alloc] init];
+
+		{
+
+			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
+
+			[arg0 unmarshal:reader ];
+		}
+
+
+        [ _service Push: arg0 ];
+        
+        break;
+    }
+    
+    case 1:
+    {
+		UInt32 arg0 = (UInt32)0;
+
+		{
+
+			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
+
+			arg0 = [reader ReadUInt32];
+		}
+
+
+        [ _service Notify: arg0 ];
+        
+        break;
+    }
+    
+    }
+    return nil;
+}
+
+@end
+
+
+@implementation GSChatIMClientRPC {
+    id<GSChannel> _channel;
+    UInt16 _serviceID;
+}
++ (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
+    return [[GSChatIMClientRPC alloc] initRPC: channel withID: serviceID];
+}
+- (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
+    if(self = [super init]) {
+        _channel = channel;
+        _serviceID = serviceID;
+    }
+    return self;
+}
+
+
+- (id<GSPromise>) Push:(GSChatMail*) arg0 {
+    GSRequest* call = [GSRequest init];
+    call.Service = _serviceID;
+    call.Method = (UInt16)0;
+    
+    NSMutableArray * params = [NSMutableArray array];
+	{
+
+		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
+
+		[arg0 marshal: writer];
+		GSParam *param  = [GSParam init];
+
+		param.Content = writer.content;
+
+		[params addObject:param];
+
+	}
+
+
+    call.Params = params;
+    
+
+    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
+
+
+        return ((id<GSPromise>(^)())block)();;
+    });
+}
+
+- (id<GSPromise>) Notify:(UInt32) arg0 {
+    GSRequest* call = [GSRequest init];
+    call.Service = _serviceID;
+    call.Method = (UInt16)1;
+    
+    NSMutableArray * params = [NSMutableArray array];
+	{
+
+		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
+
+		[writer WriteUInt32 :arg0];
+		GSParam *param  = [GSParam init];
+
+		param.Content = writer.content;
+
+		[params addObject:param];
+
+	}
+
+
+    call.Params = params;
+    
+
+    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
+
+
+        return ((id<GSPromise>(^)())block)();;
+    });
+}
+
+@end
+
+
+
+
 @implementation GSChatAttachmentTypeHelper
 
 + (void) marshal:(GSChatAttachmentType) val withWriter:(id<GSWriter>) writer {
@@ -47,32 +680,107 @@
 @end
 
 
-@implementation GSChatAttachmentCMD
+@implementation GSChatAttachmentGPS
 + (instancetype)init {
-    return [[GSChatAttachmentCMD alloc] init];
+    return [[GSChatAttachmentGPS alloc] init];
 }
 - (instancetype)init{
     if (self = [super init]){
         
-        _Command = @"";
+        _Longitude = (Float64)0;
+        
+        _Latitude = (Float64)0;
+        
+        _Address = @"";
         
     }
     return self;
 }
 - (void) marshal:(id<GSWriter>) writer {
 
-	[writer WriteString :_Command];
+	[writer WriteFloat64 :_Longitude];
+
+
+	[writer WriteFloat64 :_Latitude];
+
+
+	[writer WriteString :_Address];
 
 
 }
 - (void) unmarshal:(id<GSReader>) reader {
 
-	_Command = [reader ReadString];
+	_Longitude = [reader ReadFloat64];
+
+
+	_Latitude = [reader ReadFloat64];
+
+
+	_Address = [reader ReadString];
 
 
 }
 
 @end
+
+@implementation GSChatAttachmentText
++ (instancetype)init {
+    return [[GSChatAttachmentText alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Text = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteString :_Text];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_Text = [reader ReadString];
+
+
+}
+
+@end
+
+@implementation GSChatMailTypeHelper
+
++ (void) marshal:(GSChatMailType) val withWriter:(id<GSWriter>) writer {
+    [writer WriteByte:(UInt8) val];
+}
+
++ (GSChatMailType) unmarshal:(id<GSReader>) reader {
+    return (GSChatMailType)[reader ReadByte];
+}
+
++ (NSString*) tostring:(GSChatMailType)val {
+    
+    switch(val)
+    {
+    
+    case GSChatMailTypeSingle:
+       return @"GSChatMailTypeSingle";
+    
+    case GSChatMailTypeMulti:
+       return @"GSChatMailTypeMulti";
+    
+    case GSChatMailTypeSystem:
+       return @"GSChatMailTypeSystem";
+    
+    default:
+       return @"Unknown val";
+   }
+}
+
+@end
+
 
 @implementation GSChatUserNotFound
 + (instancetype)init {
@@ -103,34 +811,46 @@
 
 @end
 
-@implementation GSChatUserAuthFailed
-+ (instancetype)init {
-    return [[GSChatUserAuthFailed alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
+@implementation GSChatServiceTypeHelper
 
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
++ (void) marshal:(GSChatServiceType) val withWriter:(id<GSWriter>) writer {
+    [writer WriteByte:(UInt8) val];
 }
 
-- (NSError*) asNSError {
-    NSString *domain = @"GSChatUserAuthFailed";
++ (GSChatServiceType) unmarshal:(id<GSReader>) reader {
+    return (GSChatServiceType)[reader ReadByte];
+}
 
-    NSDictionary *userInfo = @{ @"source" : self };
-
-    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
-
-    return error;
++ (NSString*) tostring:(GSChatServiceType)val {
+    
+    switch(val)
+    {
+    
+    case GSChatServiceTypeUnknown:
+       return @"GSChatServiceTypeUnknown";
+    
+    case GSChatServiceTypeIM:
+       return @"GSChatServiceTypeIM";
+    
+    case GSChatServiceTypePush:
+       return @"GSChatServiceTypePush";
+    
+    case GSChatServiceTypeAuth:
+       return @"GSChatServiceTypeAuth";
+    
+    case GSChatServiceTypeClient:
+       return @"GSChatServiceTypeClient";
+    
+    case GSChatServiceTypeStatus:
+       return @"GSChatServiceTypeStatus";
+    
+    default:
+       return @"Unknown val";
+   }
 }
 
 @end
+
 
 
 
@@ -358,686 +1078,14 @@
 
 
 
-@implementation GSChatAttachment
-+ (instancetype)init {
-    return [[GSChatAttachment alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Type = GSChatAttachmentTypeText;
-        
-        _Content = [[NSMutableData alloc] init];
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[GSChatAttachmentTypeHelper marshal: _Type withWriter: writer];
-
-
-	[writer WriteBytes: _Content];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Type = [GSChatAttachmentTypeHelper unmarshal: reader];
-
-
-	_Content = [reader ReadBytes];
-
-
-}
-
-@end
-
-@implementation GSChatAttachmentText
-+ (instancetype)init {
-    return [[GSChatAttachmentText alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Text = @"";
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteString :_Text];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Text = [reader ReadString];
-
-
-}
-
-@end
-
-@implementation GSChatMailTypeHelper
-
-+ (void) marshal:(GSChatMailType) val withWriter:(id<GSWriter>) writer {
-    [writer WriteByte:(UInt8) val];
-}
-
-+ (GSChatMailType) unmarshal:(id<GSReader>) reader {
-    return (GSChatMailType)[reader ReadByte];
-}
-
-+ (NSString*) tostring:(GSChatMailType)val {
-    
-    switch(val)
-    {
-    
-    case GSChatMailTypeSingle:
-       return @"GSChatMailTypeSingle";
-    
-    case GSChatMailTypeMulti:
-       return @"GSChatMailTypeMulti";
-    
-    case GSChatMailTypeSystem:
-       return @"GSChatMailTypeSystem";
-    
-    default:
-       return @"Unknown val";
-   }
-}
-
-@end
-
-
-
-
-@implementation GSChatIMClientService{
-    id<GSChatIMClient> _service;
-}
-+ (instancetype) init:(id<GSChatIMClient>)service withID:(UInt16) serviceID {
-    return [[GSChatIMClientService alloc] init: service withID: serviceID];
-}
-- (instancetype) init:(id<GSChatIMClient>)service withID:(UInt16) serviceID {
-    if(self = [super init]) {
-        _service = service;
-        _ID = serviceID;
-    }
-    return self;
-}
-
-- (GSResponse*) Dispatch:(GSRequest*)call {
-    switch(call.Method){
-    
-    case 0:
-    {
-		GSChatMail* arg0 = [[GSChatMail alloc] init];
-
-		{
-
-			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
-
-			[arg0 unmarshal:reader ];
-		}
-
-
-        [ _service Push: arg0 ];
-        
-        break;
-    }
-    
-    case 1:
-    {
-		UInt32 arg0 = (UInt32)0;
-
-		{
-
-			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
-
-			arg0 = [reader ReadUInt32];
-		}
-
-
-        [ _service Notify: arg0 ];
-        
-        break;
-    }
-    
-    }
-    return nil;
-}
-
-@end
-
-
-@implementation GSChatIMClientRPC {
-    id<GSChannel> _channel;
-    UInt16 _serviceID;
-}
-+ (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
-    return [[GSChatIMClientRPC alloc] initRPC: channel withID: serviceID];
-}
-- (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
-    if(self = [super init]) {
-        _channel = channel;
-        _serviceID = serviceID;
-    }
-    return self;
-}
-
-
-- (id<GSPromise>) Push:(GSChatMail*) arg0 {
-    GSRequest* call = [GSRequest init];
-    call.Service = _serviceID;
-    call.Method = (UInt16)0;
-    
-    NSMutableArray * params = [NSMutableArray array];
-	{
-
-		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
-
-		[arg0 marshal: writer];
-		GSParam *param  = [GSParam init];
-
-		param.Content = writer.content;
-
-		[params addObject:param];
-
-	}
-
-
-    call.Params = params;
-    
-
-    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
-
-
-        return ((id<GSPromise>(^)())block)();;
-    });
-}
-
-- (id<GSPromise>) Notify:(UInt32) arg0 {
-    GSRequest* call = [GSRequest init];
-    call.Service = _serviceID;
-    call.Method = (UInt16)1;
-    
-    NSMutableArray * params = [NSMutableArray array];
-	{
-
-		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
-
-		[writer WriteUInt32 :arg0];
-		GSParam *param  = [GSParam init];
-
-		param.Content = writer.content;
-
-		[params addObject:param];
-
-	}
-
-
-    call.Params = params;
-    
-
-    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
-
-
-        return ((id<GSPromise>(^)())block)();;
-    });
-}
-
-@end
-
-
-
-
-@implementation GSChatAttachmentGPS
-+ (instancetype)init {
-    return [[GSChatAttachmentGPS alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Longitude = (Float64)0;
-        
-        _Latitude = (Float64)0;
-        
-        _Address = @"";
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteFloat64 :_Longitude];
-
-
-	[writer WriteFloat64 :_Latitude];
-
-
-	[writer WriteString :_Address];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Longitude = [reader ReadFloat64];
-
-
-	_Latitude = [reader ReadFloat64];
-
-
-	_Address = [reader ReadString];
-
-
-}
-
-@end
-
-@implementation GSChatProperty
-+ (instancetype)init {
-    return [[GSChatProperty alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Key = @"";
-        
-        _Value = @"";
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteString :_Key];
-
-
-	[writer WriteString :_Value];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Key = [reader ReadString];
-
-
-	_Value = [reader ReadString];
-
-
-}
-
-@end
-
-
-
-@implementation GSChatIMServerService{
-    id<GSChatIMServer> _service;
-}
-+ (instancetype) init:(id<GSChatIMServer>)service withID:(UInt16) serviceID {
-    return [[GSChatIMServerService alloc] init: service withID: serviceID];
-}
-- (instancetype) init:(id<GSChatIMServer>)service withID:(UInt16) serviceID {
-    if(self = [super init]) {
-        _service = service;
-        _ID = serviceID;
-    }
-    return self;
-}
-
-- (GSResponse*) Dispatch:(GSRequest*)call {
-    switch(call.Method){
-    
-    case 0:
-    {
-		GSChatMail* arg0 = [[GSChatMail alloc] init];
-
-		{
-
-			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
-
-			[arg0 unmarshal:reader ];
-		}
-
-
-        UInt64 ret = [ _service Put: arg0 ];
-        
-        GSResponse * callreturn  = [GSResponse init];
-        		{
-
-			GSBytesWriter *writer = [[GSBytesWriter alloc] init];
-
-			[writer WriteUInt64 :ret];
-			callreturn.Content = writer.content;
-
-		}
-
-
-        callreturn.ID = call.ID;
-        callreturn.Service = call.Service;
-        return callreturn;
-        
-        break;
-    }
-    
-    case 1:
-    {
-		UInt32 arg0 = (UInt32)0;
-
-		{
-
-			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
-
-			arg0 = [reader ReadUInt32];
-		}
-
-
-        [ _service Pull: arg0 ];
-        
-        break;
-    }
-    
-    }
-    return nil;
-}
-
-@end
-
-
-@implementation GSChatIMServerRPC {
-    id<GSChannel> _channel;
-    UInt16 _serviceID;
-}
-+ (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
-    return [[GSChatIMServerRPC alloc] initRPC: channel withID: serviceID];
-}
-- (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
-    if(self = [super init]) {
-        _channel = channel;
-        _serviceID = serviceID;
-    }
-    return self;
-}
-
-
-- (id<GSPromise>) Put:(GSChatMail*) arg0 {
-    GSRequest* call = [GSRequest init];
-    call.Service = _serviceID;
-    call.Method = (UInt16)0;
-    
-    NSMutableArray * params = [NSMutableArray array];
-	{
-
-		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
-
-		[arg0 marshal: writer];
-		GSParam *param  = [GSParam init];
-
-		param.Content = writer.content;
-
-		[params addObject:param];
-
-	}
-
-
-    call.Params = params;
-    
-
-    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
-
-		UInt64 callreturn = (UInt64)0;
-
-		{
-
-			GSBytesReader *reader = [GSBytesReader initWithNSData: response.Content];
-
-			callreturn = [reader ReadUInt64];
-		}
-
-
-        return ((id<GSPromise>(^)(UInt64))block)(callreturn);;
-    });
-}
-
-- (id<GSPromise>) Pull:(UInt32) arg0 {
-    GSRequest* call = [GSRequest init];
-    call.Service = _serviceID;
-    call.Method = (UInt16)1;
-    
-    NSMutableArray * params = [NSMutableArray array];
-	{
-
-		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
-
-		[writer WriteUInt32 :arg0];
-		GSParam *param  = [GSParam init];
-
-		param.Content = writer.content;
-
-		[params addObject:param];
-
-	}
-
-
-    call.Params = params;
-    
-
-    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
-
-
-        return ((id<GSPromise>(^)())block)();;
-    });
-}
-
-@end
-
-
-
-
-@implementation GSChatAttachmentAudio
-+ (instancetype)init {
-    return [[GSChatAttachmentAudio alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Key = @"";
-        
-        _Name = @"";
-        
-        _Duration = (SInt16)0;
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteString :_Key];
-
-
-	[writer WriteString :_Name];
-
-
-	[writer WriteInt16 :_Duration];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Key = [reader ReadString];
-
-
-	_Name = [reader ReadString];
-
-
-	_Duration = [reader ReadInt16];
-
-
-}
-
-@end
-
-@implementation GSChatServiceTypeHelper
-
-+ (void) marshal:(GSChatServiceType) val withWriter:(id<GSWriter>) writer {
-    [writer WriteByte:(UInt8) val];
-}
-
-+ (GSChatServiceType) unmarshal:(id<GSReader>) reader {
-    return (GSChatServiceType)[reader ReadByte];
-}
-
-+ (NSString*) tostring:(GSChatServiceType)val {
-    
-    switch(val)
-    {
-    
-    case GSChatServiceTypeUnknown:
-       return @"GSChatServiceTypeUnknown";
-    
-    case GSChatServiceTypeIM:
-       return @"GSChatServiceTypeIM";
-    
-    case GSChatServiceTypeAPNS:
-       return @"GSChatServiceTypeAPNS";
-    
-    case GSChatServiceTypeAuth:
-       return @"GSChatServiceTypeAuth";
-    
-    case GSChatServiceTypeClient:
-       return @"GSChatServiceTypeClient";
-    
-    default:
-       return @"Unknown val";
-   }
-}
-
-@end
-
-
-
-
-@implementation GSChatIMAPNSService{
-    id<GSChatIMAPNS> _service;
-}
-+ (instancetype) init:(id<GSChatIMAPNS>)service withID:(UInt16) serviceID {
-    return [[GSChatIMAPNSService alloc] init: service withID: serviceID];
-}
-- (instancetype) init:(id<GSChatIMAPNS>)service withID:(UInt16) serviceID {
-    if(self = [super init]) {
-        _service = service;
-        _ID = serviceID;
-    }
-    return self;
-}
-
-- (GSResponse*) Dispatch:(GSRequest*)call {
-    switch(call.Method){
-    
-    case 0:
-    {
-		NSMutableData * arg0 = [[NSMutableData alloc] init];
-
-		{
-
-			GSBytesReader *reader = [GSBytesReader initWithNSData: ((GSParam*)call.Params[0]).Content];
-
-			arg0 = [reader ReadBytes];
-		}
-
-
-        [ _service Register: arg0 ];
-        
-        break;
-    }
-    
-    case 1:
-    {
-
-         [ _service Unregister];
-        
-        break;
-    }
-    
-    }
-    return nil;
-}
-
-@end
-
-
-@implementation GSChatIMAPNSRPC {
-    id<GSChannel> _channel;
-    UInt16 _serviceID;
-}
-+ (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
-    return [[GSChatIMAPNSRPC alloc] initRPC: channel withID: serviceID];
-}
-- (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID {
-    if(self = [super init]) {
-        _channel = channel;
-        _serviceID = serviceID;
-    }
-    return self;
-}
-
-
-- (id<GSPromise>) Register:(NSMutableData *) arg0 {
-    GSRequest* call = [GSRequest init];
-    call.Service = _serviceID;
-    call.Method = (UInt16)0;
-    
-    NSMutableArray * params = [NSMutableArray array];
-	{
-
-		GSBytesWriter *writer = [[GSBytesWriter alloc] init];
-
-		[writer WriteBytes: arg0];
-		GSParam *param  = [GSParam init];
-
-		param.Content = writer.content;
-
-		[params addObject:param];
-
-	}
-
-
-    call.Params = params;
-    
-
-    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
-
-
-        return ((id<GSPromise>(^)())block)();;
-    });
-}
-
-- (id<GSPromise>) Unregister{
-    GSRequest* call = [GSRequest init];
-    call.Service = _serviceID;
-    call.Method = (UInt16)1;
-    
-
-    return GSCreatePromise(_channel,call,^id<GSPromise>(GSResponse* response,id block){
-
-
-        return ((id<GSPromise>(^)())block)();;
-    });
-}
-
-@end
-
-
-
-
 @implementation GSChatMail
 + (instancetype)init {
     return [[GSChatMail alloc] init];
 }
 - (instancetype)init{
     if (self = [super init]){
+        
+        _MailID = @"";
         
         _SQID = (UInt32)0;
         
@@ -1059,6 +1107,9 @@
     return self;
 }
 - (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteString :_MailID];
+
 
 	[writer WriteUInt32 :_SQID];
 
@@ -1089,6 +1140,9 @@
 
 }
 - (void) unmarshal:(id<GSReader>) reader {
+
+	_MailID = [reader ReadString];
+
 
 	_SQID = [reader ReadUInt32];
 
@@ -1128,78 +1182,35 @@
 
 @end
 
-@implementation GSChatAttachmentImage
+@implementation GSChatAttachment
 + (instancetype)init {
-    return [[GSChatAttachmentImage alloc] init];
+    return [[GSChatAttachment alloc] init];
 }
 - (instancetype)init{
     if (self = [super init]){
         
-        _Key = @"";
+        _Type = GSChatAttachmentTypeText;
         
-        _Name = @"";
+        _Content = [[NSMutableData alloc] init];
         
     }
     return self;
 }
 - (void) marshal:(id<GSWriter>) writer {
 
-	[writer WriteString :_Key];
+	[GSChatAttachmentTypeHelper marshal: _Type withWriter: writer];
 
 
-	[writer WriteString :_Name];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Key = [reader ReadString];
-
-
-	_Name = [reader ReadString];
-
-
-}
-
-@end
-
-@implementation GSChatAttachmentVideo
-+ (instancetype)init {
-    return [[GSChatAttachmentVideo alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Key = @"";
-        
-        _Name = @"";
-        
-        _Duration = (SInt16)0;
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteString :_Key];
-
-
-	[writer WriteString :_Name];
-
-
-	[writer WriteInt16 :_Duration];
+	[writer WriteBytes: _Content];
 
 
 }
 - (void) unmarshal:(id<GSReader>) reader {
 
-	_Key = [reader ReadString];
+	_Type = [GSChatAttachmentTypeHelper unmarshal: reader];
 
 
-	_Name = [reader ReadString];
-
-
-	_Duration = [reader ReadInt16];
+	_Content = [reader ReadBytes];
 
 
 }
