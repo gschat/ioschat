@@ -3,6 +3,50 @@
 #import <com/gsrpc/gsrpc.gs.h>
 
 
+@implementation GSCodeHelper
+
++ (void) marshal:(GSCode) val withWriter:(id<GSWriter>) writer {
+    [writer WriteByte:(UInt8) val];
+}
+
++ (GSCode) unmarshal:(id<GSReader>) reader {
+    return (GSCode)[reader ReadByte];
+}
+
++ (NSString*) tostring:(GSCode)val {
+    
+    switch(val)
+    {
+    
+    case GSCodeHeartbeat:
+       return @"GSCodeHeartbeat";
+    
+    case GSCodeWhoAmI:
+       return @"GSCodeWhoAmI";
+    
+    case GSCodeRequest:
+       return @"GSCodeRequest";
+    
+    case GSCodeResponse:
+       return @"GSCodeResponse";
+    
+    case GSCodeAccept:
+       return @"GSCodeAccept";
+    
+    case GSCodeReject:
+       return @"GSCodeReject";
+    
+    case GSCodeTunnel:
+       return @"GSCodeTunnel";
+    
+    default:
+       return @"Unknown val";
+   }
+}
+
+@end
+
+
 @implementation GSStateHelper
 
 + (void) marshal:(GSState) val withWriter:(id<GSWriter>) writer {
@@ -41,6 +85,71 @@
 @end
 
 
+@implementation GSRequest
++ (instancetype)init {
+    return [[GSRequest alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _ID = (UInt16)0;
+        
+        _Method = (UInt16)0;
+        
+        _Service = (UInt16)0;
+        
+        _Params = [NSMutableArray arrayWithCapacity: 0];
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+	[writer WriteUInt16 :_ID];
+
+
+	[writer WriteUInt16 :_Method];
+
+
+	[writer WriteUInt16 :_Service];
+
+
+	[writer WriteUInt16:_Params.count];
+	for(id v1 in _Params){
+		GSParam* vv1 = (GSParam*)v1;
+		[vv1 marshal: writer];
+	}
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+	_ID = [reader ReadUInt16];
+
+
+	_Method = [reader ReadUInt16];
+
+
+	_Service = [reader ReadUInt16];
+
+
+	UInt16 imax1 = [reader ReadUInt16];
+
+	for(UInt16 i1 = 0; i1 < imax1; i1 ++ ){
+
+		GSParam* v1 = [[GSParam alloc] init];
+
+		[v1 unmarshal:reader ];
+
+		[ _Params addObject: v1];
+
+	}
+
+
+}
+
+@end
+
 @implementation GSArchTypeHelper
 
 + (void) marshal:(GSArchType) val withWriter:(id<GSWriter>) writer {
@@ -72,6 +181,35 @@
 
 @end
 
+
+@implementation GSInvalidContract
++ (instancetype)init {
+    return [[GSInvalidContract alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+}
+
+- (NSError*) asNSError {
+    NSString *domain = @"GSInvalidContract";
+
+    NSDictionary *userInfo = @{ @"source" : self };
+
+    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
+
+    return error;
+}
+
+@end
 
 @implementation GSDevice
 + (instancetype)init {
@@ -175,35 +313,6 @@
 
 @end
 
-@implementation GSInvalidContract
-+ (instancetype)init {
-    return [[GSInvalidContract alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-}
-
-- (NSError*) asNSError {
-    NSString *domain = @"GSInvalidContract";
-
-    NSDictionary *userInfo = @{ @"source" : self };
-
-    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
-
-    return error;
-}
-
-@end
-
 @implementation GSRemoteException
 + (instancetype)init {
     return [[GSRemoteException alloc] init];
@@ -232,50 +341,6 @@
 }
 
 @end
-
-@implementation GSCodeHelper
-
-+ (void) marshal:(GSCode) val withWriter:(id<GSWriter>) writer {
-    [writer WriteByte:(UInt8) val];
-}
-
-+ (GSCode) unmarshal:(id<GSReader>) reader {
-    return (GSCode)[reader ReadByte];
-}
-
-+ (NSString*) tostring:(GSCode)val {
-    
-    switch(val)
-    {
-    
-    case GSCodeHeartbeat:
-       return @"GSCodeHeartbeat";
-    
-    case GSCodeWhoAmI:
-       return @"GSCodeWhoAmI";
-    
-    case GSCodeRequest:
-       return @"GSCodeRequest";
-    
-    case GSCodeResponse:
-       return @"GSCodeResponse";
-    
-    case GSCodeAccept:
-       return @"GSCodeAccept";
-    
-    case GSCodeReject:
-       return @"GSCodeReject";
-    
-    case GSCodeTunnel:
-       return @"GSCodeTunnel";
-    
-    default:
-       return @"Unknown val";
-   }
-}
-
-@end
-
 
 @implementation GSMessage
 + (instancetype)init {
@@ -341,71 +406,6 @@
 - (void) unmarshal:(id<GSReader>) reader {
 
 	_Content = [reader ReadBytes];
-
-
-}
-
-@end
-
-@implementation GSRequest
-+ (instancetype)init {
-    return [[GSRequest alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _ID = (UInt16)0;
-        
-        _Method = (UInt16)0;
-        
-        _Service = (UInt16)0;
-        
-        _Params = [NSMutableArray arrayWithCapacity: 0];
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteUInt16 :_ID];
-
-
-	[writer WriteUInt16 :_Method];
-
-
-	[writer WriteUInt16 :_Service];
-
-
-	[writer WriteUInt16:_Params.count];
-	for(id v1 in _Params){
-		GSParam* vv1 = (GSParam*)v1;
-		[vv1 marshal: writer];
-	}
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_ID = [reader ReadUInt16];
-
-
-	_Method = [reader ReadUInt16];
-
-
-	_Service = [reader ReadUInt16];
-
-
-	UInt16 imax1 = [reader ReadUInt16];
-
-	for(UInt16 i1 = 0; i1 < imax1; i1 ++ ){
-
-		GSParam* v1 = [[GSParam alloc] init];
-
-		[v1 unmarshal:reader ];
-
-		[ _Params addObject: v1];
-
-	}
 
 
 }
