@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		155654652B54AAC44414E9F4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 338BF6820E9E59F1B283DED8 /* libPods.a */; };
 		B66609E01BB5312000E7A8AA /* gschat.gs.m in Sources */ = {isa = PBXBuildFile; fileRef = B66609DC1BB5312000E7A8AA /* gschat.gs.m */; settings = {ASSET_TAGS = (); }; };
-		B66609E11BB5312000E7A8AA /* gsrpc.gs.m in Sources */ = {isa = PBXBuildFile; fileRef = B66609DF1BB5312000E7A8AA /* gsrpc.gs.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,8 +29,6 @@
 		B66609CD1BB530E100E7A8AA /* libgsrpc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libgsrpc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66609DB1BB5312000E7A8AA /* gschat.gs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gschat.gs.h; sourceTree = "<group>"; };
 		B66609DC1BB5312000E7A8AA /* gschat.gs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gschat.gs.m; sourceTree = "<group>"; };
-		B66609DE1BB5312000E7A8AA /* gsrpc.gs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gsrpc.gs.h; sourceTree = "<group>"; };
-		B66609DF1BB5312000E7A8AA /* gsrpc.gs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gsrpc.gs.m; sourceTree = "<group>"; };
 		E034CD25D06B1FBAF72802A8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				B66609DA1BB5312000E7A8AA /* gschat */,
-				B66609DD1BB5312000E7A8AA /* gsrpc */,
 			);
 			path = com;
 			sourceTree = "<group>";
@@ -98,15 +94,6 @@
 				B66609DC1BB5312000E7A8AA /* gschat.gs.m */,
 			);
 			path = gschat;
-			sourceTree = "<group>";
-		};
-		B66609DD1BB5312000E7A8AA /* gsrpc */ = {
-			isa = PBXGroup;
-			children = (
-				B66609DE1BB5312000E7A8AA /* gsrpc.gs.h */,
-				B66609DF1BB5312000E7A8AA /* gsrpc.gs.m */,
-			);
-			path = gsrpc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,7 +187,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B66609E11BB5312000E7A8AA /* gsrpc.gs.m in Sources */,
 				B66609E01BB5312000E7A8AA /* gschat.gs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
