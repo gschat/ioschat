@@ -15,7 +15,11 @@
         },
 
         "objrpc":{
-            "main":"./gsrpc"
+
+            "main":{
+                "output":"./gsrpc",
+                "skips":["gsrpc/[^/]*\\.gs"]
+            }
         }
     }
 }
