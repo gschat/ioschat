@@ -3,85 +3,6 @@
 #import <com/gsrpc/gsrpc.gs.h>
 
 
-@implementation GSChatAttachment
-+ (instancetype)init {
-    return [[GSChatAttachment alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Type = GSChatAttachmentTypeText;
-        
-        _Content = [[NSMutableData alloc] init];
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[GSChatAttachmentTypeHelper marshal: _Type withWriter: writer];
-
-
-	[writer WriteBytes: _Content];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Type = [GSChatAttachmentTypeHelper unmarshal: reader];
-
-
-	_Content = [reader ReadBytes];
-
-
-}
-
-@end
-
-@implementation GSChatAttachmentTypeHelper
-
-+ (void) marshal:(GSChatAttachmentType) val withWriter:(id<GSWriter>) writer {
-    [writer WriteByte:(UInt8) val];
-}
-
-+ (GSChatAttachmentType) unmarshal:(id<GSReader>) reader {
-    return (GSChatAttachmentType)[reader ReadByte];
-}
-
-+ (NSString*) tostring:(GSChatAttachmentType)val {
-    
-    switch(val)
-    {
-    
-    case GSChatAttachmentTypeText:
-       return @"GSChatAttachmentTypeText";
-    
-    case GSChatAttachmentTypeImage:
-       return @"GSChatAttachmentTypeImage";
-    
-    case GSChatAttachmentTypeVideo:
-       return @"GSChatAttachmentTypeVideo";
-    
-    case GSChatAttachmentTypeAudio:
-       return @"GSChatAttachmentTypeAudio";
-    
-    case GSChatAttachmentTypeGPS:
-       return @"GSChatAttachmentTypeGPS";
-    
-    case GSChatAttachmentTypeCMD:
-       return @"GSChatAttachmentTypeCMD";
-    
-    case GSChatAttachmentTypeCustomer:
-       return @"GSChatAttachmentTypeCustomer";
-    
-    default:
-       return @"Unknown val";
-   }
-}
-
-@end
-
-
 
 
 @implementation GSChatIMAuthService{
@@ -312,6 +233,236 @@
 
 
 
+
+@implementation GSChatAttachmentTypeHelper
+
++ (void) marshal:(GSChatAttachmentType) val withWriter:(id<GSWriter>) writer {
+    [writer WriteByte:(UInt8) val];
+}
+
++ (GSChatAttachmentType) unmarshal:(id<GSReader>) reader {
+    return (GSChatAttachmentType)[reader ReadByte];
+}
+
++ (NSString*) tostring:(GSChatAttachmentType)val {
+    
+    switch(val)
+    {
+    
+    case GSChatAttachmentTypeText:
+       return @"GSChatAttachmentTypeText";
+    
+    case GSChatAttachmentTypeImage:
+       return @"GSChatAttachmentTypeImage";
+    
+    case GSChatAttachmentTypeVideo:
+       return @"GSChatAttachmentTypeVideo";
+    
+    case GSChatAttachmentTypeAudio:
+       return @"GSChatAttachmentTypeAudio";
+    
+    case GSChatAttachmentTypeGPS:
+       return @"GSChatAttachmentTypeGPS";
+    
+    case GSChatAttachmentTypeCMD:
+       return @"GSChatAttachmentTypeCMD";
+    
+    case GSChatAttachmentTypeCustomer:
+       return @"GSChatAttachmentTypeCustomer";
+    
+    default:
+       return @"Unknown val";
+   }
+}
+
+@end
+
+
+@implementation GSChatAttachmentImage
++ (instancetype)init {
+    return [[GSChatAttachmentImage alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Key = @"";
+        
+        _Name = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)2];
+
+	[writer WriteString :_Key];
+
+
+	[writer WriteString :_Name];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    UInt8 __fields = [reader ReadByte];
+
+
+	_Key = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+	_Name = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+}
+
+@end
+
+@implementation GSChatAttachmentCMD
++ (instancetype)init {
+    return [[GSChatAttachmentCMD alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Command = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)1];
+
+	[writer WriteString :_Command];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    UInt8 __fields = [reader ReadByte];
+
+
+	_Command = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+}
+
+@end
+
+@implementation GSChatUserNotFound
++ (instancetype)init {
+    return [[GSChatUserNotFound alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)0];
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    [reader ReadByte];
+
+
+}
+
+- (NSError*) asNSError {
+    NSString *domain = @"GSChatUserNotFound";
+
+    NSDictionary *userInfo = @{ @"source" : self };
+
+    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
+
+    return error;
+}
+
+@end
+
+@implementation GSChatServiceTypeHelper
+
++ (void) marshal:(GSChatServiceType) val withWriter:(id<GSWriter>) writer {
+    [writer WriteByte:(UInt8) val];
+}
+
++ (GSChatServiceType) unmarshal:(id<GSReader>) reader {
+    return (GSChatServiceType)[reader ReadByte];
+}
+
++ (NSString*) tostring:(GSChatServiceType)val {
+    
+    switch(val)
+    {
+    
+    case GSChatServiceTypeUnknown:
+       return @"GSChatServiceTypeUnknown";
+    
+    case GSChatServiceTypeIM:
+       return @"GSChatServiceTypeIM";
+    
+    case GSChatServiceTypePush:
+       return @"GSChatServiceTypePush";
+    
+    case GSChatServiceTypeAuth:
+       return @"GSChatServiceTypeAuth";
+    
+    case GSChatServiceTypeClient:
+       return @"GSChatServiceTypeClient";
+    
+    case GSChatServiceTypeStatus:
+       return @"GSChatServiceTypeStatus";
+    
+    default:
+       return @"Unknown val";
+   }
+}
+
+@end
+
+
+@implementation GSChatUnexpectSQID
++ (instancetype)init {
+    return [[GSChatUnexpectSQID alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)0];
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    [reader ReadByte];
+
+
+}
+
+- (NSError*) asNSError {
+    NSString *domain = @"GSChatUnexpectSQID";
+
+    NSDictionary *userInfo = @{ @"source" : self };
+
+    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
+
+    return error;
+}
+
+@end
 
 
 
@@ -645,6 +796,151 @@
 
 
 
+@implementation GSChatAttachmentGPS
++ (instancetype)init {
+    return [[GSChatAttachmentGPS alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Longitude = (Float64)0;
+        
+        _Latitude = (Float64)0;
+        
+        _Address = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)3];
+
+	[writer WriteFloat64 :_Longitude];
+
+
+	[writer WriteFloat64 :_Latitude];
+
+
+	[writer WriteString :_Address];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    UInt8 __fields = [reader ReadByte];
+
+
+	_Longitude = [reader ReadFloat64];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+	_Latitude = [reader ReadFloat64];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+	_Address = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+}
+
+@end
+
+@implementation GSChatAttachmentVideo
++ (instancetype)init {
+    return [[GSChatAttachmentVideo alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Key = @"";
+        
+        _Name = @"";
+        
+        _Duration = (SInt16)0;
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)3];
+
+	[writer WriteString :_Key];
+
+
+	[writer WriteString :_Name];
+
+
+	[writer WriteInt16 :_Duration];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    UInt8 __fields = [reader ReadByte];
+
+
+	_Key = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+	_Name = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+	_Duration = [reader ReadInt16];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+}
+
+@end
+
+@implementation GSChatUserAuthFailed
++ (instancetype)init {
+    return [[GSChatUserAuthFailed alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)0];
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    [reader ReadByte];
+
+
+}
+
+- (NSError*) asNSError {
+    NSString *domain = @"GSChatUserAuthFailed";
+
+    NSDictionary *userInfo = @{ @"source" : self };
+
+    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
+
+    return error;
+}
+
+@end
+
 
 
 @implementation GSChatIMClientService{
@@ -792,6 +1088,84 @@
 
 
 
+@implementation GSChatResourceNotFound
++ (instancetype)init {
+    return [[GSChatResourceNotFound alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)0];
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    [reader ReadByte];
+
+
+}
+
+- (NSError*) asNSError {
+    NSString *domain = @"GSChatResourceNotFound";
+
+    NSDictionary *userInfo = @{ @"source" : self };
+
+    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
+
+    return error;
+}
+
+@end
+
+@implementation GSChatProperty
++ (instancetype)init {
+    return [[GSChatProperty alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Key = @"";
+        
+        _Value = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)2];
+
+	[writer WriteString :_Key];
+
+
+	[writer WriteString :_Value];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    UInt8 __fields = [reader ReadByte];
+
+
+	_Key = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+	_Value = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+}
+
+@end
+
 @implementation GSChatMail
 + (instancetype)init {
     return [[GSChatMail alloc] init];
@@ -821,6 +1195,7 @@
     return self;
 }
 - (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)9];
 
 	[writer WriteString :_MailID];
 
@@ -856,26 +1231,50 @@
 }
 - (void) unmarshal:(id<GSReader>) reader {
 
+    UInt8 __fields = [reader ReadByte];
+
+
 	_MailID = [reader ReadString];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_SQID = [reader ReadUInt32];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_TS = [reader ReadUInt64];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_Sender = [reader ReadString];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_Receiver = [reader ReadString];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_Type = [GSChatMailTypeHelper unmarshal: reader];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_Content = [reader ReadString];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	UInt16 imax1 = [reader ReadUInt16];
 
@@ -889,44 +1288,94 @@
 
 	}
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_Extension = [reader ReadBytes];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 }
 
 @end
 
-@implementation GSChatAttachmentImage
+@implementation GSChatAttachment
 + (instancetype)init {
-    return [[GSChatAttachmentImage alloc] init];
+    return [[GSChatAttachment alloc] init];
 }
 - (instancetype)init{
     if (self = [super init]){
         
-        _Key = @"";
+        _Type = GSChatAttachmentTypeText;
         
-        _Name = @"";
+        _Content = [[NSMutableData alloc] init];
         
     }
     return self;
 }
 - (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)2];
 
-	[writer WriteString :_Key];
+	[GSChatAttachmentTypeHelper marshal: _Type withWriter: writer];
 
 
-	[writer WriteString :_Name];
+	[writer WriteBytes: _Content];
 
 
 }
 - (void) unmarshal:(id<GSReader>) reader {
 
-	_Key = [reader ReadString];
+    UInt8 __fields = [reader ReadByte];
 
 
-	_Name = [reader ReadString];
+	_Type = [GSChatAttachmentTypeHelper unmarshal: reader];
 
+    if(-- __fields == 0) {
+        return;
+    }
+
+	_Content = [reader ReadBytes];
+
+    if(-- __fields == 0) {
+        return;
+    }
+
+}
+
+@end
+
+@implementation GSChatAttachmentText
++ (instancetype)init {
+    return [[GSChatAttachmentText alloc] init];
+}
+- (instancetype)init{
+    if (self = [super init]){
+        
+        _Text = @"";
+        
+    }
+    return self;
+}
+- (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)1];
+
+	[writer WriteString :_Text];
+
+
+}
+- (void) unmarshal:(id<GSReader>) reader {
+
+    UInt8 __fields = [reader ReadByte];
+
+
+	_Text = [reader ReadString];
+
+    if(-- __fields == 0) {
+        return;
+    }
 
 }
 
@@ -949,6 +1398,7 @@
     return self;
 }
 - (void) marshal:(id<GSWriter>) writer {
+    [writer WriteByte :(UInt8)3];
 
 	[writer WriteString :_Key];
 
@@ -962,41 +1412,26 @@
 }
 - (void) unmarshal:(id<GSReader>) reader {
 
+    UInt8 __fields = [reader ReadByte];
+
+
 	_Key = [reader ReadString];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_Name = [reader ReadString];
 
+    if(-- __fields == 0) {
+        return;
+    }
 
 	_Duration = [reader ReadInt16];
 
-
-}
-
-@end
-
-@implementation GSChatAttachmentCMD
-+ (instancetype)init {
-    return [[GSChatAttachmentCMD alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Command = @"";
-        
+    if(-- __fields == 0) {
+        return;
     }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteString :_Command];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Command = [reader ReadString];
-
 
 }
 
@@ -1033,308 +1468,3 @@
 
 @end
 
-
-@implementation GSChatServiceTypeHelper
-
-+ (void) marshal:(GSChatServiceType) val withWriter:(id<GSWriter>) writer {
-    [writer WriteByte:(UInt8) val];
-}
-
-+ (GSChatServiceType) unmarshal:(id<GSReader>) reader {
-    return (GSChatServiceType)[reader ReadByte];
-}
-
-+ (NSString*) tostring:(GSChatServiceType)val {
-    
-    switch(val)
-    {
-    
-    case GSChatServiceTypeUnknown:
-       return @"GSChatServiceTypeUnknown";
-    
-    case GSChatServiceTypeIM:
-       return @"GSChatServiceTypeIM";
-    
-    case GSChatServiceTypePush:
-       return @"GSChatServiceTypePush";
-    
-    case GSChatServiceTypeAuth:
-       return @"GSChatServiceTypeAuth";
-    
-    case GSChatServiceTypeClient:
-       return @"GSChatServiceTypeClient";
-    
-    case GSChatServiceTypeStatus:
-       return @"GSChatServiceTypeStatus";
-    
-    default:
-       return @"Unknown val";
-   }
-}
-
-@end
-
-
-@implementation GSChatAttachmentText
-+ (instancetype)init {
-    return [[GSChatAttachmentText alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Text = @"";
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteString :_Text];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Text = [reader ReadString];
-
-
-}
-
-@end
-
-@implementation GSChatAttachmentVideo
-+ (instancetype)init {
-    return [[GSChatAttachmentVideo alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Key = @"";
-        
-        _Name = @"";
-        
-        _Duration = (SInt16)0;
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteString :_Key];
-
-
-	[writer WriteString :_Name];
-
-
-	[writer WriteInt16 :_Duration];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Key = [reader ReadString];
-
-
-	_Name = [reader ReadString];
-
-
-	_Duration = [reader ReadInt16];
-
-
-}
-
-@end
-
-@implementation GSChatUserAuthFailed
-+ (instancetype)init {
-    return [[GSChatUserAuthFailed alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-}
-
-- (NSError*) asNSError {
-    NSString *domain = @"GSChatUserAuthFailed";
-
-    NSDictionary *userInfo = @{ @"source" : self };
-
-    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
-
-    return error;
-}
-
-@end
-
-@implementation GSChatResourceNotFound
-+ (instancetype)init {
-    return [[GSChatResourceNotFound alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-}
-
-- (NSError*) asNSError {
-    NSString *domain = @"GSChatResourceNotFound";
-
-    NSDictionary *userInfo = @{ @"source" : self };
-
-    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
-
-    return error;
-}
-
-@end
-
-@implementation GSChatUnexpectSQID
-+ (instancetype)init {
-    return [[GSChatUnexpectSQID alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-}
-
-- (NSError*) asNSError {
-    NSString *domain = @"GSChatUnexpectSQID";
-
-    NSDictionary *userInfo = @{ @"source" : self };
-
-    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
-
-    return error;
-}
-
-@end
-
-@implementation GSChatAttachmentGPS
-+ (instancetype)init {
-    return [[GSChatAttachmentGPS alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Longitude = (Float64)0;
-        
-        _Latitude = (Float64)0;
-        
-        _Address = @"";
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteFloat64 :_Longitude];
-
-
-	[writer WriteFloat64 :_Latitude];
-
-
-	[writer WriteString :_Address];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Longitude = [reader ReadFloat64];
-
-
-	_Latitude = [reader ReadFloat64];
-
-
-	_Address = [reader ReadString];
-
-
-}
-
-@end
-
-@implementation GSChatUserNotFound
-+ (instancetype)init {
-    return [[GSChatUserNotFound alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-}
-
-- (NSError*) asNSError {
-    NSString *domain = @"GSChatUserNotFound";
-
-    NSDictionary *userInfo = @{ @"source" : self };
-
-    NSError *error = [NSError errorWithDomain:domain code:-101 userInfo:userInfo];
-
-    return error;
-}
-
-@end
-
-@implementation GSChatProperty
-+ (instancetype)init {
-    return [[GSChatProperty alloc] init];
-}
-- (instancetype)init{
-    if (self = [super init]){
-        
-        _Key = @"";
-        
-        _Value = @"";
-        
-    }
-    return self;
-}
-- (void) marshal:(id<GSWriter>) writer {
-
-	[writer WriteString :_Key];
-
-
-	[writer WriteString :_Value];
-
-
-}
-- (void) unmarshal:(id<GSReader>) reader {
-
-	_Key = [reader ReadString];
-
-
-	_Value = [reader ReadString];
-
-
-}
-
-@end

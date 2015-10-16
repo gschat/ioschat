@@ -1,3 +1,3 @@
 xcodeproj "gsrpc/gsrpc.xcodeproj"
 
-pod 'objrpc', '~> 1.0.0'
+pod 'objrpc', '~> 1.0.2'

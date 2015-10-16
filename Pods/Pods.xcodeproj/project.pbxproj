@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		05F8CFB46CE1BE13044E5C96EFB51833 /* gsrpc.gs.h in Headers */ = {isa = PBXBuildFile; fileRef = 710ED6469425FEA694250C1AEBD8B03C /* gsrpc.gs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0746B5F77BEA8F69683B73561BC5D3E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		0877CFE3EE872C4A1450838B5AC0B607 /* objrpc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F688A746E49986265CC0605537737F58 /* objrpc-dummy.m */; };
+		3329A5E53780B71BD15236418777A96D /* objrpc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F688A746E49986265CC0605537737F58 /* objrpc-dummy.m */; };
 		45EF94A30A5CE1684777629DFCA7EB9B /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */; };
+		665A95547230E8F836FB66E781C00FB3 /* future.m in Sources */ = {isa = PBXBuildFile; fileRef = 75EA3B8F9036C313DD89CD7DC8F30110 /* future.m */; };
 		68B162C0536E9B1DF26A01E7FAF77CCE /* channel.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D8FDF128C4A3E0B689081ED2F28BF4 /* channel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		76FF7C55E1B41F9F1B964231709DDE1D /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D416AC4A23B9E0B4A91E1070C19DABE /* stream.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		905497302210ACD046D29911D3A7158E /* future.m in Sources */ = {isa = PBXBuildFile; fileRef = 75EA3B8F9036C313DD89CD7DC8F30110 /* future.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		90364320F83BD98961A7C9F6BB722065 /* gsrpc.gs.m in Sources */ = {isa = PBXBuildFile; fileRef = D499339AF2B3B60A317BA9FBF2C6433D /* gsrpc.gs.m */; };
 		93F397616D455449A5693490377D7F89 /* future.h in Headers */ = {isa = PBXBuildFile; fileRef = D9D1839132B33FC31E7E3C313BF88694 /* future.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CA1087F8819911D3F5D1CFFE930DEECD /* stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 679CF26C33CB1A8BE93A3E8060893C4D /* stream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E001EDA190F2C5B31B5C9B1A783FE999 /* gsrpc.gs.m in Sources */ = {isa = PBXBuildFile; fileRef = D499339AF2B3B60A317BA9FBF2C6433D /* gsrpc.gs.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		E65D88C885145E01F3E1BA75CD36E80E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		FC514CDB407DC9F57E05A24C5D6C5B62 /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D416AC4A23B9E0B4A91E1070C19DABE /* stream.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,7 +205,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DDFCA6919128AA339B0F5375C31ACB24 /* Build configuration list for PBXNativeTarget "objrpc" */;
 			buildPhases = (
-				70E2F7B936B000742BA8C815B84F92FA /* Sources */,
+				90255B78E524797BF8627AE823E02A13 /* Sources */,
 				EC4500D1C81D0420264535CD808827EF /* Frameworks */,
 				6B47A9BFE89E55BDAF154F2CB25814EA /* Headers */,
 			);
@@ -254,14 +254,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		70E2F7B936B000742BA8C815B84F92FA /* Sources */ = {
+		90255B78E524797BF8627AE823E02A13 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				905497302210ACD046D29911D3A7158E /* future.m in Sources */,
-				E001EDA190F2C5B31B5C9B1A783FE999 /* gsrpc.gs.m in Sources */,
-				0877CFE3EE872C4A1450838B5AC0B607 /* objrpc-dummy.m in Sources */,
-				76FF7C55E1B41F9F1B964231709DDE1D /* stream.m in Sources */,
+				665A95547230E8F836FB66E781C00FB3 /* future.m in Sources */,
+				90364320F83BD98961A7C9F6BB722065 /* gsrpc.gs.m in Sources */,
+				3329A5E53780B71BD15236418777A96D /* objrpc-dummy.m in Sources */,
+				FC514CDB407DC9F57E05A24C5D6C5B62 /* stream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +362,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
