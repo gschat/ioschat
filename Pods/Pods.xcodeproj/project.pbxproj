@@ -7,17 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05F8CFB46CE1BE13044E5C96EFB51833 /* gsrpc.gs.h in Headers */ = {isa = PBXBuildFile; fileRef = 710ED6469425FEA694250C1AEBD8B03C /* gsrpc.gs.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0746B5F77BEA8F69683B73561BC5D3E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		3329A5E53780B71BD15236418777A96D /* objrpc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F688A746E49986265CC0605537737F58 /* objrpc-dummy.m */; };
+		0C455DCAE3C4A667ECF3DFF1A47B9DF3 /* stream.h in Headers */ = {isa = PBXBuildFile; fileRef = CA02EC9A72A04A5DB61A21DEFDC04512 /* stream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		12192472BAAC94894A3082D25848DF6C /* objrpc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 778CC383D03500F14FC4B78B1B728D6F /* objrpc-dummy.m */; };
+		2F7C1B23129DAC9AFAF0659B2F0A27F9 /* gsrpc.gs.h in Headers */ = {isa = PBXBuildFile; fileRef = D4C9ECF3F97D64F3B61386DEE0B720C7 /* gsrpc.gs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		30561EA40A6773F45566051D5AE1FF79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		45EF94A30A5CE1684777629DFCA7EB9B /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */; };
-		665A95547230E8F836FB66E781C00FB3 /* future.m in Sources */ = {isa = PBXBuildFile; fileRef = 75EA3B8F9036C313DD89CD7DC8F30110 /* future.m */; };
-		68B162C0536E9B1DF26A01E7FAF77CCE /* channel.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D8FDF128C4A3E0B689081ED2F28BF4 /* channel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		90364320F83BD98961A7C9F6BB722065 /* gsrpc.gs.m in Sources */ = {isa = PBXBuildFile; fileRef = D499339AF2B3B60A317BA9FBF2C6433D /* gsrpc.gs.m */; };
-		93F397616D455449A5693490377D7F89 /* future.h in Headers */ = {isa = PBXBuildFile; fileRef = D9D1839132B33FC31E7E3C313BF88694 /* future.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CA1087F8819911D3F5D1CFFE930DEECD /* stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 679CF26C33CB1A8BE93A3E8060893C4D /* stream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D45AC0F039CED436B8A286008475F4D /* future.m in Sources */ = {isa = PBXBuildFile; fileRef = FB6984124B3DBE90DEE8F7A56D739676 /* future.m */; };
+		642F7BA45814B7D084F303B662F4A437 /* service.gs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3D9EDD10B3412609114B5A8A873BDC /* service.gs.m */; };
+		6B0BB3EBBB2E86B307C03C16B80A5B16 /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023AC7B146265CB9806407295190157 /* stream.m */; };
+		741C9385000119842D826AE459A1B4EC /* future.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C55A2A10B2B879F1C1C74FA2FDA693F /* future.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E2379FDCEA7EA17076D116B627ECCD7 /* tracer.gs.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3C3F3C94A5A665C6443014BD77F5A7 /* tracer.gs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A1ED70929ED4FF07F55DFA834BF0B2B9 /* tracer.gs.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DFE9FC3062F54D11602BA11F847B16 /* tracer.gs.m */; };
+		B50B6E5C2B156B5AE99D40E469253ECB /* gsrpc.gs.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F32AE48ABCCD051DEBE55E49F6CF425 /* gsrpc.gs.m */; };
+		BACF1B0E2EF7B0360C59E7941C2E076F /* service.gs.h in Headers */ = {isa = PBXBuildFile; fileRef = AF05CB143B42EBF81F40D5DF19C22701 /* service.gs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DDC4C21344E2341C0CC777ECDBB78FBC /* channel.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DD49609FDA5B9C3E8A725C48E5D1F2 /* channel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E65D88C885145E01F3E1BA75CD36E80E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		FC514CDB407DC9F57E05A24C5D6C5B62 /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D416AC4A23B9E0B4A91E1070C19DABE /* stream.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,33 +29,37 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1013C2C7B0D5B0B30E3C617477E0BA2C;
+			remoteGlobalIDString = 3ED70A0C7935B7CB8C095E698DFAB75A;
 			remoteInfo = objrpc;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F32AE48ABCCD051DEBE55E49F6CF425 /* gsrpc.gs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = gsrpc.gs.m; path = src/com/gsrpc/gsrpc.gs.m; sourceTree = "<group>"; };
 		10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		2023AC7B146265CB9806407295190157 /* stream.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = stream.m; path = src/com/gsrpc/stream.m; sourceTree = "<group>"; };
 		272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		2D0049A54C0DAC6045506C996E5FA8FA /* objrpc-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "objrpc-prefix.pch"; sourceTree = "<group>"; };
 		37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3D416AC4A23B9E0B4A91E1070C19DABE /* stream.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = stream.m; path = src/com/gsrpc/stream.m; sourceTree = "<group>"; };
+		3C3C3F3C94A5A665C6443014BD77F5A7 /* tracer.gs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tracer.gs.h; path = src/com/gsrpc/trace/tracer.gs.h; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		4ACC4ADC6FB68D05F4ED0628B31A0256 /* objrpc-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "objrpc-prefix.pch"; sourceTree = "<group>"; };
 		4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		63D8FDF128C4A3E0B689081ED2F28BF4 /* channel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = channel.h; path = src/com/gsrpc/channel.h; sourceTree = "<group>"; };
-		679CF26C33CB1A8BE93A3E8060893C4D /* stream.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = stream.h; path = src/com/gsrpc/stream.h; sourceTree = "<group>"; };
 		6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
-		710ED6469425FEA694250C1AEBD8B03C /* gsrpc.gs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = gsrpc.gs.h; path = src/com/gsrpc/gsrpc.gs.h; sourceTree = "<group>"; };
-		75EA3B8F9036C313DD89CD7DC8F30110 /* future.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = future.m; path = src/com/gsrpc/future.m; sourceTree = "<group>"; };
+		6C3D9EDD10B3412609114B5A8A873BDC /* service.gs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = service.gs.m; path = src/com/gsrpc/service.gs.m; sourceTree = "<group>"; };
+		778CC383D03500F14FC4B78B1B728D6F /* objrpc-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "objrpc-dummy.m"; sourceTree = "<group>"; };
+		7C55A2A10B2B879F1C1C74FA2FDA693F /* future.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = future.h; path = src/com/gsrpc/future.h; sourceTree = "<group>"; };
+		8727FD95B29397E1600ACE6D94428578 /* objrpc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = objrpc.xcconfig; sourceTree = "<group>"; };
+		93DFE9FC3062F54D11602BA11F847B16 /* tracer.gs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = tracer.gs.m; path = src/com/gsrpc/trace/tracer.gs.m; sourceTree = "<group>"; };
 		98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
 		A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		AF05CB143B42EBF81F40D5DF19C22701 /* service.gs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = service.gs.h; path = src/com/gsrpc/service.gs.h; sourceTree = "<group>"; };
 		BA0BD826B03104F4F7CB0550AA928B2F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		D499339AF2B3B60A317BA9FBF2C6433D /* gsrpc.gs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = gsrpc.gs.m; path = src/com/gsrpc/gsrpc.gs.m; sourceTree = "<group>"; };
-		D9D1839132B33FC31E7E3C313BF88694 /* future.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = future.h; path = src/com/gsrpc/future.h; sourceTree = "<group>"; };
+		CA02EC9A72A04A5DB61A21DEFDC04512 /* stream.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = stream.h; path = src/com/gsrpc/stream.h; sourceTree = "<group>"; };
+		D4C9ECF3F97D64F3B61386DEE0B720C7 /* gsrpc.gs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = gsrpc.gs.h; path = src/com/gsrpc/gsrpc.gs.h; sourceTree = "<group>"; };
+		D5DD49609FDA5B9C3E8A725C48E5D1F2 /* channel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = channel.h; path = src/com/gsrpc/channel.h; sourceTree = "<group>"; };
 		E2EF2EB2AAE15FE061249BEFDAED457B /* libobjrpc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libobjrpc.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F688A746E49986265CC0605537737F58 /* objrpc-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "objrpc-dummy.m"; sourceTree = "<group>"; };
-		FF3DC1B7B34F16DA0CC0482EAFC9685F /* objrpc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = objrpc.xcconfig; sourceTree = "<group>"; };
+		FB6984124B3DBE90DEE8F7A56D739676 /* future.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = future.m; path = src/com/gsrpc/future.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,11 +71,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EC4500D1C81D0420264535CD808827EF /* Frameworks */ = {
+		B199E1F59121A0F412ECDE76179CD30A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0746B5F77BEA8F69683B73561BC5D3E1 /* Foundation.framework in Frameworks */,
+				30561EA40A6773F45566051D5AE1FF79 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,30 +90,23 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		5A1E6A560B7ABA21B1732C880025D63E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A35579E20EF3854F67E8BFC3097F5030 /* objrpc */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				E4B1AFFAE32B8FAD2C994CD0A2A83611 /* Pods */,
+				5A1E6A560B7ABA21B1732C880025D63E /* Pods */,
 				99733331667BC1A6DECDF28C552E9460 /* Products */,
 				037C0CA694176A3C0915F62C9D20B3E6 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		871AFEF792E986A91F755DBCF7269D6A /* objrpc */ = {
-			isa = PBXGroup;
-			children = (
-				63D8FDF128C4A3E0B689081ED2F28BF4 /* channel.h */,
-				D9D1839132B33FC31E7E3C313BF88694 /* future.h */,
-				75EA3B8F9036C313DD89CD7DC8F30110 /* future.m */,
-				710ED6469425FEA694250C1AEBD8B03C /* gsrpc.gs.h */,
-				D499339AF2B3B60A317BA9FBF2C6433D /* gsrpc.gs.m */,
-				679CF26C33CB1A8BE93A3E8060893C4D /* stream.h */,
-				3D416AC4A23B9E0B4A91E1070C19DABE /* stream.m */,
-				E3FB27D2B95A8BF3467F28D9DA395474 /* Support Files */,
-			);
-			path = objrpc;
 			sourceTree = "<group>";
 		};
 		99733331667BC1A6DECDF28C552E9460 /* Products */ = {
@@ -115,6 +116,36 @@
 				BA0BD826B03104F4F7CB0550AA928B2F /* libPods.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A35579E20EF3854F67E8BFC3097F5030 /* objrpc */ = {
+			isa = PBXGroup;
+			children = (
+				D5DD49609FDA5B9C3E8A725C48E5D1F2 /* channel.h */,
+				7C55A2A10B2B879F1C1C74FA2FDA693F /* future.h */,
+				FB6984124B3DBE90DEE8F7A56D739676 /* future.m */,
+				D4C9ECF3F97D64F3B61386DEE0B720C7 /* gsrpc.gs.h */,
+				0F32AE48ABCCD051DEBE55E49F6CF425 /* gsrpc.gs.m */,
+				AF05CB143B42EBF81F40D5DF19C22701 /* service.gs.h */,
+				6C3D9EDD10B3412609114B5A8A873BDC /* service.gs.m */,
+				CA02EC9A72A04A5DB61A21DEFDC04512 /* stream.h */,
+				2023AC7B146265CB9806407295190157 /* stream.m */,
+				3C3C3F3C94A5A665C6443014BD77F5A7 /* tracer.gs.h */,
+				93DFE9FC3062F54D11602BA11F847B16 /* tracer.gs.m */,
+				A3AF23C923EC9E07230DF313D28B81A4 /* Support Files */,
+			);
+			path = objrpc;
+			sourceTree = "<group>";
+		};
+		A3AF23C923EC9E07230DF313D28B81A4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8727FD95B29397E1600ACE6D94428578 /* objrpc.xcconfig */,
+				778CC383D03500F14FC4B78B1B728D6F /* objrpc-dummy.m */,
+				4ACC4ADC6FB68D05F4ED0628B31A0256 /* objrpc-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/objrpc";
 			sourceTree = "<group>";
 		};
 		B3D1D13E0C6553800746CB8FD61CF946 /* Pods */ = {
@@ -148,36 +179,19 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		E3FB27D2B95A8BF3467F28D9DA395474 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				FF3DC1B7B34F16DA0CC0482EAFC9685F /* objrpc.xcconfig */,
-				F688A746E49986265CC0605537737F58 /* objrpc-dummy.m */,
-				2D0049A54C0DAC6045506C996E5FA8FA /* objrpc-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/objrpc";
-			sourceTree = "<group>";
-		};
-		E4B1AFFAE32B8FAD2C994CD0A2A83611 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				871AFEF792E986A91F755DBCF7269D6A /* objrpc */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		6B47A9BFE89E55BDAF154F2CB25814EA /* Headers */ = {
+		2CB0B7E8A65B49539E1E98AA9D8F4115 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68B162C0536E9B1DF26A01E7FAF77CCE /* channel.h in Headers */,
-				93F397616D455449A5693490377D7F89 /* future.h in Headers */,
-				05F8CFB46CE1BE13044E5C96EFB51833 /* gsrpc.gs.h in Headers */,
-				CA1087F8819911D3F5D1CFFE930DEECD /* stream.h in Headers */,
+				DDC4C21344E2341C0CC777ECDBB78FBC /* channel.h in Headers */,
+				741C9385000119842D826AE459A1B4EC /* future.h in Headers */,
+				2F7C1B23129DAC9AFAF0659B2F0A27F9 /* gsrpc.gs.h in Headers */,
+				BACF1B0E2EF7B0360C59E7941C2E076F /* service.gs.h in Headers */,
+				0C455DCAE3C4A667ECF3DFF1A47B9DF3 /* stream.h in Headers */,
+				8E2379FDCEA7EA17076D116B627ECCD7 /* tracer.gs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,13 +215,13 @@
 			productReference = BA0BD826B03104F4F7CB0550AA928B2F /* libPods.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		1013C2C7B0D5B0B30E3C617477E0BA2C /* objrpc */ = {
+		3ED70A0C7935B7CB8C095E698DFAB75A /* objrpc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DDFCA6919128AA339B0F5375C31ACB24 /* Build configuration list for PBXNativeTarget "objrpc" */;
+			buildConfigurationList = 4B0DAF497DF99680A0BE4EA10F846C3D /* Build configuration list for PBXNativeTarget "objrpc" */;
 			buildPhases = (
-				90255B78E524797BF8627AE823E02A13 /* Sources */,
-				EC4500D1C81D0420264535CD808827EF /* Frameworks */,
-				6B47A9BFE89E55BDAF154F2CB25814EA /* Headers */,
+				B689121D8B90A20D26470BF694EA2D36 /* Sources */,
+				B199E1F59121A0F412ECDE76179CD30A /* Frameworks */,
+				2CB0B7E8A65B49539E1E98AA9D8F4115 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -239,7 +253,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1013C2C7B0D5B0B30E3C617477E0BA2C /* objrpc */,
+				3ED70A0C7935B7CB8C095E698DFAB75A /* objrpc */,
 				0C6A88B0AEFE6EE923F410826E4188D7 /* Pods */,
 			);
 		};
@@ -254,14 +268,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		90255B78E524797BF8627AE823E02A13 /* Sources */ = {
+		B689121D8B90A20D26470BF694EA2D36 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				665A95547230E8F836FB66E781C00FB3 /* future.m in Sources */,
-				90364320F83BD98961A7C9F6BB722065 /* gsrpc.gs.m in Sources */,
-				3329A5E53780B71BD15236418777A96D /* objrpc-dummy.m in Sources */,
-				FC514CDB407DC9F57E05A24C5D6C5B62 /* stream.m in Sources */,
+				4D45AC0F039CED436B8A286008475F4D /* future.m in Sources */,
+				B50B6E5C2B156B5AE99D40E469253ECB /* gsrpc.gs.m in Sources */,
+				12192472BAAC94894A3082D25848DF6C /* objrpc-dummy.m in Sources */,
+				642F7BA45814B7D084F303B662F4A437 /* service.gs.m in Sources */,
+				6B0BB3EBBB2E86B307C03C16B80A5B16 /* stream.m in Sources */,
+				A1ED70929ED4FF07F55DFA834BF0B2B9 /* tracer.gs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,12 +287,30 @@
 		40205E619FFAABD36E2A46368863E4F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = objrpc;
-			target = 1013C2C7B0D5B0B30E3C617477E0BA2C /* objrpc */;
+			target = 3ED70A0C7935B7CB8C095E698DFAB75A /* objrpc */;
 			targetProxy = 17C5463AFE639C2DC598EBDDCBAB3B5C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0D369F38169830D924768FD6ADF2CF45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8727FD95B29397E1600ACE6D94428578 /* objrpc.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/objrpc/objrpc-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		112E1E7C28810E7331708DF9410E5EA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */;
@@ -294,9 +328,9 @@
 			};
 			name = Release;
 		};
-		517BD9AD81926B5116FFF77D556566D5 /* Debug */ = {
+		50038317AFA46548EE5BD7414BDBEC8D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF3DC1B7B34F16DA0CC0482EAFC9685F /* objrpc.xcconfig */;
+			baseConfigurationReference = 8727FD95B29397E1600ACE6D94428578 /* objrpc.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/objrpc/objrpc-prefix.pch";
@@ -402,24 +436,6 @@
 			};
 			name = Release;
 		};
-		D18D9C058CE8E41A39381380AAA51B64 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF3DC1B7B34F16DA0CC0482EAFC9685F /* objrpc.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/objrpc/objrpc-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -432,20 +448,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		4B0DAF497DF99680A0BE4EA10F846C3D /* Build configuration list for PBXNativeTarget "objrpc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50038317AFA46548EE5BD7414BDBEC8D /* Debug */,
+				0D369F38169830D924768FD6ADF2CF45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		61FFAE98E2DB0F797743D925DD27DDA7 /* Build configuration list for PBXNativeTarget "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5B39B22BAB54565FDC58BCDB707FB8E2 /* Debug */,
 				112E1E7C28810E7331708DF9410E5EA2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DDFCA6919128AA339B0F5375C31ACB24 /* Build configuration list for PBXNativeTarget "objrpc" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				517BD9AD81926B5116FFF77D556566D5 /* Debug */,
-				D18D9C058CE8E41A39381380AAA51B64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

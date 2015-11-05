@@ -1,10 +1,10 @@
 PODS:
-  - objrpc (1.0.4)
+  - objrpc (1.0.5)
 
 DEPENDENCIES:
-  - objrpc (~> 1.0.4)
+  - objrpc (~> 1.0.5)
 
 SPEC CHECKSUMS:
-  objrpc: d06557498e6131ac8a4c79e78cc78df10f45cc67
+  objrpc: df4bfdaac72e34dff33227fe25169ba6ea3850fc
 
 COCOAPODS: 0.39.0
