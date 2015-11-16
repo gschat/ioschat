@@ -1,49 +1,30 @@
 #ifndef COM_GSCHAT_GSCHAT_GS
 #define COM_GSCHAT_GSCHAT_GS
+#import <com/gsrpc/stream.h>
+
 #import <com/gsrpc/channel.h>
 
 #import <com/gschat/shared.gs.h>
 
 
 
-#import <com/gsrpc/stream.h>
-
 #import <com/gsrpc/gsrpc.gs.h>
 
 
 
 
-
-//GSChatClient generate by objrpc
-@protocol GSChatClient<NSObject>
-
-- (void) Push:(GSChatMail*)arg0;
-
-- (void) Notify:(UInt32)arg0;
-
-- (void) DeviceStateChanged:(GSDevice*)arg0 withArg1:(BOOL)arg1;
-
-@end
-
-// GSChatClientService generate by objrpc
-@interface GSChatClientService : NSObject<GSDispatcher>
-+ (instancetype) init:(id<GSChatClient>)service withID:(UInt16) serviceID;
-
-@property(readonly) UInt16 ID;
-
-- (GSResponse *)Dispatch:(GSRequest *)call;
-
-@end
+@class GSChatSync;
 
 
-@interface GSChatClientRPC : NSObject
-+ (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID;
+@interface GSChatSync : NSObject
 
-- (NSError*) Push:(GSChatMail*) arg0 ;
+@property UInt32 Offset;
 
-- (NSError*) Notify:(UInt32) arg0 ;
+@property UInt32 Count;
 
-- (NSError*) DeviceStateChanged:(GSDevice*) arg0  withArg1:(BOOL) arg1 ;
++ (instancetype)init;
+- (void) marshal:(id<GSWriter>) writer;
+- (void) unmarshal:(id<GSReader>) reader;
 
 @end
 
@@ -56,9 +37,11 @@
 
 - (UInt64) Put:(GSChatMail*)arg0;
 
-- (UInt32) Sync:(UInt32)arg0 withArg1:(UInt32)arg1;
+- (GSChatSync*) Sync:(UInt32)arg0 withArg1:(UInt32)arg1;
 
 - (void) Fin:(UInt32)arg0;
+
+- (NSMutableArray *) Fetch:(NSMutableArray *)arg0;
 
 @end
 
@@ -83,6 +66,8 @@
 - (id<GSPromise>) Sync:(UInt32) arg0  withArg1:(UInt32) arg1 ;
 
 - (id<GSPromise>) Fin:(UInt32) arg0 ;
+
+- (id<GSPromise>) Fetch:(NSMutableArray *) arg0 ;
 
 @end
 
@@ -145,6 +130,41 @@
 - (id<GSPromise>) Register:(NSMutableData *) arg0 ;
 
 - (id<GSPromise>) Unregister;
+
+@end
+
+
+
+//GSChatClient generate by objrpc
+@protocol GSChatClient<NSObject>
+
+- (void) Push:(GSChatMail*)arg0;
+
+- (void) Notify:(UInt32)arg0;
+
+- (void) DeviceStateChanged:(GSDevice*)arg0 withArg1:(BOOL)arg1;
+
+@end
+
+// GSChatClientService generate by objrpc
+@interface GSChatClientService : NSObject<GSDispatcher>
++ (instancetype) init:(id<GSChatClient>)service withID:(UInt16) serviceID;
+
+@property(readonly) UInt16 ID;
+
+- (GSResponse *)Dispatch:(GSRequest *)call;
+
+@end
+
+
+@interface GSChatClientRPC : NSObject
++ (instancetype) initRPC:(id<GSChannel>) channel withID:(UInt16) serviceID;
+
+- (NSError*) Push:(GSChatMail*) arg0 ;
+
+- (NSError*) Notify:(UInt32) arg0 ;
+
+- (NSError*) DeviceStateChanged:(GSDevice*) arg0  withArg1:(BOOL) arg1 ;
 
 @end
 

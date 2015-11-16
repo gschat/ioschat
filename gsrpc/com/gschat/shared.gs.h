@@ -5,68 +5,52 @@
 #import <com/gsrpc/stream.h>
 
 
-typedef enum GSChatMailType:UInt8 GSChatMailType;
+@class GSChatAttachmentText;
 
-@class GSChatUserAuthFailed;
-
-@class GSChatResourceNotFound;
+@class GSChatUserNotFound;
 
 typedef enum GSChatService:UInt8 GSChatService;
 
 @class GSChatAttachment;
 
-@class GSChatAttachmentCMD;
+typedef enum GSChatAttachmentType:UInt8 GSChatAttachmentType;
 
-@class GSChatUserNotFound;
-
-@class GSChatAttachmentVideo;
+@class GSChatResourceNotFound;
 
 @class GSChatResourceBusy;
 
-@class GSChatMail;
+@class GSChatAttachmentVideo;
 
-typedef enum GSChatAttachmentType:UInt8 GSChatAttachmentType;
-
-@class GSChatAttachmentText;
-
-@class GSChatUnexpectSQID;
-
-@class GSChatAttachmentGPS;
+@class GSChatUserAuthFailed;
 
 @class GSChatAttachmentImage;
 
 @class GSChatAttachmentAudio;
 
+@class GSChatAttachmentCMD;
 
-// GSChatMailType enum
-enum GSChatMailType:UInt8{ 
-	GSChatMailTypeSingle = 0,
-	GSChatMailTypeMulti = 1,
-	GSChatMailTypeSystem = 2
- };
+typedef enum GSChatMailType:UInt8 GSChatMailType;
 
-// GSChatMailType enum marshal/unmarshal helper interface
-@interface GSChatMailTypeHelper : NSObject
-+ (void) marshal:(GSChatMailType) val withWriter:(id<GSWriter>) writer;
-+ (GSChatMailType) unmarshal:(id<GSReader>) reader;
-+ (NSString*) tostring :(GSChatMailType)val;
-@end
+@class GSChatUnexpectSQID;
+
+@class GSChatMail;
+
+@class GSChatAttachmentGPS;
 
 
+@interface GSChatAttachmentText : NSObject
 
-@interface GSChatUserAuthFailed : NSObject
+@property(nonatomic, strong) NSString* Text;
 
 + (instancetype)init;
 - (void) marshal:(id<GSWriter>) writer;
 - (void) unmarshal:(id<GSReader>) reader;
 
-- (NSError*) asNSError;
-
 @end
 
 
 
-@interface GSChatResourceNotFound : NSObject
+@interface GSChatUserNotFound : NSObject
 
 + (instancetype)init;
 - (void) marshal:(id<GSWriter>) writer;
@@ -87,7 +71,10 @@ enum GSChatService:UInt8{
 	GSChatServiceClient = 5,
 	GSChatServiceUserBinder = 6,
 	GSChatServicePushServiceProvider = 7,
-	GSChatServiceDHKeyResolver = 8
+	GSChatServiceDHKeyResolver = 8,
+	GSChatServiceUserResolverListener = 9,
+	GSChatServiceUserResolver = 10,
+	GSChatServiceGateway = 11
  };
 
 // GSChatService enum marshal/unmarshal helper interface
@@ -113,19 +100,39 @@ enum GSChatService:UInt8{
 
 
 
-@interface GSChatAttachmentCMD : NSObject
+// GSChatAttachmentType enum
+enum GSChatAttachmentType:UInt8{ 
+	GSChatAttachmentTypeText = 0,
+	GSChatAttachmentTypeImage = 1,
+	GSChatAttachmentTypeVideo = 2,
+	GSChatAttachmentTypeAudio = 3,
+	GSChatAttachmentTypeGPS = 4,
+	GSChatAttachmentTypeCMD = 5,
+	GSChatAttachmentTypeCustomer = 6
+ };
 
-@property(nonatomic, strong) NSString* Command;
+// GSChatAttachmentType enum marshal/unmarshal helper interface
+@interface GSChatAttachmentTypeHelper : NSObject
++ (void) marshal:(GSChatAttachmentType) val withWriter:(id<GSWriter>) writer;
++ (GSChatAttachmentType) unmarshal:(id<GSReader>) reader;
++ (NSString*) tostring :(GSChatAttachmentType)val;
+@end
+
+
+
+@interface GSChatResourceNotFound : NSObject
 
 + (instancetype)init;
 - (void) marshal:(id<GSWriter>) writer;
 - (void) unmarshal:(id<GSReader>) reader;
 
+- (NSError*) asNSError;
+
 @end
 
 
 
-@interface GSChatUserNotFound : NSObject
+@interface GSChatResourceBusy : NSObject
 
 + (instancetype)init;
 - (void) marshal:(id<GSWriter>) writer;
@@ -153,7 +160,77 @@ enum GSChatService:UInt8{
 
 
 
-@interface GSChatResourceBusy : NSObject
+@interface GSChatUserAuthFailed : NSObject
+
++ (instancetype)init;
+- (void) marshal:(id<GSWriter>) writer;
+- (void) unmarshal:(id<GSReader>) reader;
+
+- (NSError*) asNSError;
+
+@end
+
+
+
+@interface GSChatAttachmentImage : NSObject
+
+@property(nonatomic, strong) NSString* Key;
+
+@property(nonatomic, strong) NSString* Name;
+
++ (instancetype)init;
+- (void) marshal:(id<GSWriter>) writer;
+- (void) unmarshal:(id<GSReader>) reader;
+
+@end
+
+
+
+@interface GSChatAttachmentAudio : NSObject
+
+@property(nonatomic, strong) NSString* Key;
+
+@property(nonatomic, strong) NSString* Name;
+
+@property SInt16 Duration;
+
++ (instancetype)init;
+- (void) marshal:(id<GSWriter>) writer;
+- (void) unmarshal:(id<GSReader>) reader;
+
+@end
+
+
+
+@interface GSChatAttachmentCMD : NSObject
+
+@property(nonatomic, strong) NSString* Command;
+
++ (instancetype)init;
+- (void) marshal:(id<GSWriter>) writer;
+- (void) unmarshal:(id<GSReader>) reader;
+
+@end
+
+
+
+// GSChatMailType enum
+enum GSChatMailType:UInt8{ 
+	GSChatMailTypeSingle = 0,
+	GSChatMailTypeMulti = 1,
+	GSChatMailTypeSystem = 2
+ };
+
+// GSChatMailType enum marshal/unmarshal helper interface
+@interface GSChatMailTypeHelper : NSObject
++ (void) marshal:(GSChatMailType) val withWriter:(id<GSWriter>) writer;
++ (GSChatMailType) unmarshal:(id<GSReader>) reader;
++ (NSString*) tostring :(GSChatMailType)val;
+@end
+
+
+
+@interface GSChatUnexpectSQID : NSObject
 
 + (instancetype)init;
 - (void) marshal:(id<GSWriter>) writer;
@@ -193,50 +270,6 @@ enum GSChatService:UInt8{
 
 
 
-// GSChatAttachmentType enum
-enum GSChatAttachmentType:UInt8{ 
-	GSChatAttachmentTypeText = 0,
-	GSChatAttachmentTypeImage = 1,
-	GSChatAttachmentTypeVideo = 2,
-	GSChatAttachmentTypeAudio = 3,
-	GSChatAttachmentTypeGPS = 4,
-	GSChatAttachmentTypeCMD = 5,
-	GSChatAttachmentTypeCustomer = 6
- };
-
-// GSChatAttachmentType enum marshal/unmarshal helper interface
-@interface GSChatAttachmentTypeHelper : NSObject
-+ (void) marshal:(GSChatAttachmentType) val withWriter:(id<GSWriter>) writer;
-+ (GSChatAttachmentType) unmarshal:(id<GSReader>) reader;
-+ (NSString*) tostring :(GSChatAttachmentType)val;
-@end
-
-
-
-@interface GSChatAttachmentText : NSObject
-
-@property(nonatomic, strong) NSString* Text;
-
-+ (instancetype)init;
-- (void) marshal:(id<GSWriter>) writer;
-- (void) unmarshal:(id<GSReader>) reader;
-
-@end
-
-
-
-@interface GSChatUnexpectSQID : NSObject
-
-+ (instancetype)init;
-- (void) marshal:(id<GSWriter>) writer;
-- (void) unmarshal:(id<GSReader>) reader;
-
-- (NSError*) asNSError;
-
-@end
-
-
-
 @interface GSChatAttachmentGPS : NSObject
 
 @property Float64 Longitude;
@@ -244,36 +277,6 @@ enum GSChatAttachmentType:UInt8{
 @property Float64 Latitude;
 
 @property(nonatomic, strong) NSString* Address;
-
-+ (instancetype)init;
-- (void) marshal:(id<GSWriter>) writer;
-- (void) unmarshal:(id<GSReader>) reader;
-
-@end
-
-
-
-@interface GSChatAttachmentImage : NSObject
-
-@property(nonatomic, strong) NSString* Key;
-
-@property(nonatomic, strong) NSString* Name;
-
-+ (instancetype)init;
-- (void) marshal:(id<GSWriter>) writer;
-- (void) unmarshal:(id<GSReader>) reader;
-
-@end
-
-
-
-@interface GSChatAttachmentAudio : NSObject
-
-@property(nonatomic, strong) NSString* Key;
-
-@property(nonatomic, strong) NSString* Name;
-
-@property SInt16 Duration;
 
 + (instancetype)init;
 - (void) marshal:(id<GSWriter>) writer;
